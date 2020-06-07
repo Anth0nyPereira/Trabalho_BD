@@ -1,0 +1,29 @@
+﻿<Page x:Class="Pets_At_First_Sight.CriarConta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Pets_At_First_Sight"
+        mc:Ignorable="d"
+        Title="CriarConta" Height="667" Width="375" Background="#DCE3E7">
+    <Grid>
+        <Image Source="Imagens/logo1.png" Height="110" Width="110" Margin="132,88,133,468">
+        </Image>
+        <!--IMAGEM-->
+        <Image x:Name="InputImage" Grid.Column="0" Height="96" VerticalAlignment="Top" Margin="20,211,256,0"/>
+        <Button HorizontalAlignment="Right" Height="Auto" Width="55" Click="BtnLoadFromFile_Click" RenderTransformOrigin="3.05,-5.2" Margin="0,313,277,305">
+            <materialDesign:PackIcon Kind="ImageSearchOutline" Height="49" Width="30" Margin="-10"/>
+        </Button>
+        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25"  Content="Criar Conta" HorizontalAlignment="Left" Margin="125,559,0,0" VerticalAlignment="Top" Width="124" Height="49" Click="Button_Click" ToolTip="Entrar">
+        </Button>
+        <TextBox Name="criar_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,260,54,364" />
+        <TextBox Name="criar_localidade" materialDesign:HintAssist.Hint="Localidade" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="17,440,57,184" Height="43" />
+        <TextBox Name="criar_nome" materialDesign:HintAssist.Hint="Nome" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,200,54,424" />
+        <TextBox Name="criar_email" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,318,54,306" />
+        <PasswordBox x:Name="criar_pass" Height="38" materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" VerticalAlignment="Center" Margin="20,384,54,245" />
+        <Button Background="Transparent" BorderThickness="0" Margin="70,492,72,143" Click="Button_Click_2">
+            <Label Content="Já tem conta?"/>
+        </Button>
+    </Grid>
+</Page>

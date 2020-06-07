@@ -1,0 +1,118 @@
+﻿<Page x:Class="Pets_At_First_Sight.Post"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pets_At_First_Sight"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="667" d:DesignWidth="375"
+      Title="Post"
+      WindowHeight="667"
+      WindowWidth="375"
+      Background="#DCE3E7">
+    <!-- Main grid here -->
+    <Grid Height="667">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="159*"/>
+            <ColumnDefinition Width="106*"/>
+            <ColumnDefinition Width="110*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="Titulo_Loja" Height="35" Content="Post" Margin="0,24,44,607" FontFamily="Arial" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="64" Grid.ColumnSpan="2"/>
+
+        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <materialDesign:PackIcon
+                Kind="ArrowBack"
+                Height="24"
+                Width="24" />
+        </Button>
+
+        <!--NOME-->
+        <Label FontSize="20" Height="35" HorizontalAlignment="Right" Width="81" Content=" Nome:" Margin="0,75,11,557" Grid.Column="1"/>
+        <TextBox x:Name="NomeAnimal" FontSize="18" Grid.Column="2" Height="35" Margin="10,67,10,565"/>
+
+
+        <!--IDADE-->
+        <Label FontSize="20" Content="  Idade:" Height="35" Margin="14,134,11,498" Grid.Column="1"/>
+        <ComboBox FontSize="18" x:Name="IdadeAnimal" Grid.Column="2" Height="34" Margin="10,127,10,506" >
+            <ComboBoxItem Content="1 meses"/>
+            <ComboBoxItem Content="2 meses"/>
+            <ComboBoxItem Content="3 meses"/>
+            <ComboBoxItem Content="4 meses"/>
+            <ComboBoxItem Content="5 meses"/>
+            <ComboBoxItem Content="6 meses"/>
+            <ComboBoxItem Content="7 meses"/>
+            <ComboBoxItem Content="8 meses"/>
+            <ComboBoxItem Content="9 meses"/>
+            <ComboBoxItem Content="10 meses"/>
+            <ComboBoxItem Content="11 meses"/>
+            <ComboBoxItem Content="1 ano"/>
+            <ComboBoxItem Content="2 anos"/>
+            <ComboBoxItem Content="3 anos"/>
+            <ComboBoxItem Content="4 anos"/>
+            <ComboBoxItem Content="5 anos"/>
+            <ComboBoxItem Content="6 anos"/>
+            <ComboBoxItem Content="7 anos"/>
+            <ComboBoxItem Content="8 anos"/>
+            <ComboBoxItem Content="9 anos"/>
+            <ComboBoxItem Content="10 anos"/>
+            <ComboBoxItem Content="11 anos"/>
+            <ComboBoxItem Content="12 anos"/>
+            <ComboBoxItem Content="13 anos"/>
+            <ComboBoxItem Content="14 anos"/>
+            <ComboBoxItem Content="15 anos"/>
+            
+        </ComboBox>
+
+        <!--ESPÉCIE-->
+        <Label Height="35" FontSize="20" VerticalAlignment="Top" Content="Espécie:" Grid.Column="1" Margin="10,194,11,0"/>
+        <ComboBox FontSize="18" x:Name="EspecieAnimal" Height="35" Margin="10,186,10,0" VerticalAlignment="Top" Grid.Column="2" >
+            <ComboBoxItem IsSelected="True" Content="Cão"/>
+            <ComboBoxItem Content="Gato"/>
+        </ComboBox>
+
+        <!--GÉNERO-->
+        <Label Height="35" FontSize="20" VerticalAlignment="Top" Content="Género:" Margin="10,254,15,0" Grid.Column="1"/>
+        <ComboBox FontSize="18" x:Name="GeneroAnimal" Height="34" Margin="10,247,10,386" Grid.Column="2" >
+            <ComboBoxItem Content="Masculino"/>
+            <ComboBoxItem Content="Feminino"/>
+        </ComboBox>
+
+        <!--TIPO DOADOR-->
+        <Label Height="35" FontSize="18" VerticalAlignment="Top" Content="Tipo doador:" Margin="135,315,15,0" Grid.ColumnSpan="2"/>
+        <ComboBox FontSize="18" x:Name="TipoDoador" Height="37" Margin="10,304,10,326" Grid.Column="2">
+            <ComboBoxItem IsSelected="True" Content="Abrigo"/>
+            <ComboBoxItem Content="Particular"/>
+        </ComboBox>
+
+        <!--VACINAS-->
+        <Label FontSize="18" Height="35" VerticalAlignment="Top"  Content="Vacinas:" Margin="15,375,18,0" Grid.Column="1"/>
+        <ComboBox FontSize="18" x:Name="Vacinas" Height="36" Margin="10,365,10,266" RenderTransformOrigin="3,2.472" Grid.Column="2" >
+            <ComboBoxItem Content="Sim"/>
+            <ComboBoxItem IsSelected="True" Content="Não"/>
+        </ComboBox>
+
+        <!--CHIP-->
+        <Label FontSize="18" Height="35" VerticalAlignment="Top" Content="Chip:" Margin="38,436,18,0" Grid.Column="1"/>
+        <ComboBox FontSize="18" x:Name="Chip" VerticalAlignment="Top" Height="38" Margin="10,424,10,0" Grid.Column="2" >
+            <ComboBoxItem Content="Sim"/>
+            <ComboBoxItem IsSelected="True" Content="Não"/>
+        </ComboBox>
+
+        <!--IMAGEM-->
+        <Image x:Name="InputImage" Grid.Column="0" HorizontalAlignment="Right" Height="102" VerticalAlignment="Top" Width="120" Margin="0,90,23,0"/>
+        <Button HorizontalAlignment="Right" Height="Auto" Width="55" Click="BtnLoadFromFile_Click" RenderTransformOrigin="3.05,-5.2" Margin="0,202,51,416">
+            <materialDesign:PackIcon Kind="ImageSearchOutline" Height="49" Width="30" Margin="-10"/>
+        </Button>
+
+        <TextBox x:Name="PostTexto" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" 
+                VerticalAlignment="Top" Height="99" AcceptsReturn="True" 
+                TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                materialDesign:HintAssist.Hint="Insira aqui o seu &#10; texto."
+                IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Margin="16,272,24,0" />
+        <Button x:Name="SubmeterPost" Click="ButtonSubmeter_Click" Height="50" Content="Submeter Post" Margin="87,524,88,93" Grid.ColumnSpan="3"/>
+
+    </Grid>
+
+</Page>
