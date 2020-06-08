@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\
+=======
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\
+>>>>>>> 8448cf50a50a84110e82c4b2200a1deaa3261aac
 Pets_At_First_Sight
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\App.xaml
 18-1685541667
 
 26-1844543030
 161168756026
 Adocoes.xaml;CriarConta.xaml;Favoritos.xaml;Inicio.xaml;InicioFiltros.xaml;Login.xaml;Loja.xaml;LojaFiltros.xaml;MainWindow.xaml;Teste.xaml;VerFoto.xaml;Post.xaml;Perfil.xaml;Post_MaisInfo.xaml;ViewPost_Adocoes.xaml;ViewPost_Favoritos.xaml;ViewPost_Perfil.xaml;Windows.xaml;
+=======
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\App.xaml
+17-738178737
+
+24-551313077
+15765721488
+Adocoes.xaml;CriarConta.xaml;Favoritos.xaml;Inicio.xaml;InicioFiltros.xaml;Login.xaml;Loja.xaml;LojaFiltros.xaml;MainWindow.xaml;VerFoto.xaml;Post.xaml;Perfil.xaml;Post_MaisInfo.xaml;ViewPost_Adocoes.xaml;ViewPost_Favoritos.xaml;ViewPost_Perfil.xaml;Windows.xaml;
+>>>>>>> 8448cf50a50a84110e82c4b2200a1deaa3261aac
 
 False
 
