@@ -13,5 +13,6 @@
         <DataGrid Name="datagrid">
             
         </DataGrid>
+        <Label Name="Label1" Content="Label" HorizontalAlignment="Left" Margin="675,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="11.733,-0.733"/>
     </Grid>
 </Page>

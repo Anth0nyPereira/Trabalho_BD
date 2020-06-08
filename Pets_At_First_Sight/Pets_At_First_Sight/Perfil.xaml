@@ -10,7 +10,8 @@
       Title="Perfil" 
       WindowHeight="667"
       WindowWidth="375"
-      Background="#DCE3E7">
+      Background="#DCE3E7"
+      Loaded="Window_Loaded">
     <!-- Main grid -->
     <Grid >
         <Grid.ColumnDefinitions>

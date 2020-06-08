@@ -31,6 +31,7 @@ namespace Pets_At_First_Sight
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            /*
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT [nome] FROM projeto.ANIMAL";
             SQLServerConnection.command.CommandType = CommandType.Text;
@@ -39,6 +40,17 @@ namespace Pets_At_First_Sight
             SQLServerConnection.datatable = new DataTable();
             SQLServerConnection.adapter.Fill(SQLServerConnection.datatable);
             datagrid.ItemsSource = SQLServerConnection.datatable.DefaultView;
+            SQLServerConnection.closeConnection();
+            */
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "SELECT [nome] FROM projeto.ANIMAL WHERE nome='Cão'";
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            while (SQLServerConnection.reader.Read())
+            {
+                Label1.Content = SQLServerConnection.reader["nome"];
+            }
             SQLServerConnection.closeConnection();
         }
     }

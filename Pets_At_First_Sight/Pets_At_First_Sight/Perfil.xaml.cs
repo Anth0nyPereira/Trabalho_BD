@@ -5,6 +5,9 @@ using System;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Security.Permissions;
+using System.Data;
+using System.Data.SqlClient;
+using Pets_At_First_Sight.Classes;
 
 namespace Pets_At_First_Sight
 {
@@ -16,6 +19,23 @@ namespace Pets_At_First_Sight
             dados_perfil();
             List<ANIMAL> op = MeusPosts();
             My_Posts.ItemsSource = op;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "SELECT* FROM projeto.CONTA WHERE username=@username2";
+            SQLServerConnection.command.Parameters.AddWithValue("@username2", Container.utilizador_logado.First().Username.ToString());
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            while (SQLServerConnection.reader.Read())
+            {
+                nome.Content = SQLServerConnection.reader["nome"];
+                email.Content = SQLServerConnection.reader["email"];
+                localidade.Content = SQLServerConnection.reader["morada"];
+            }
+            SQLServerConnection.closeConnection();
         }
 
         bool check = true;
@@ -40,9 +60,6 @@ namespace Pets_At_First_Sight
             
             Imagem.ImageSource= new BitmapImage(new Uri(z, UriKind.RelativeOrAbsolute));
             username.Content = Container.utilizador_logado.First().Username.ToString();
-            nome.Content= Container.utilizador_logado.First().NomePessoa.ToString();
-            email.Content = Container.utilizador_logado.First().Email.ToString();
-            localidade.Content = Container.utilizador_logado.First().Localidade.ToString();
         }
 
 
