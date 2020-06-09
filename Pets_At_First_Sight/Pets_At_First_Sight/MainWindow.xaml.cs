@@ -28,6 +28,7 @@ namespace Pets_At_First_Sight
         public static List<Produto> produtos = new List<Produto>();
         public static List<Conta> contas = new List<Conta>();
         public static List<Conta> utilizador_logado = new List<Conta>();
+        public static String current_user;
 
     }
     public partial class MainWindow : Window
