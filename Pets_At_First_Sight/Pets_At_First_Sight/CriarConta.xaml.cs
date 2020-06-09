@@ -1,6 +1,9 @@
 ﻿using Microsoft.Win32;
+using Pets_At_First_Sight.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,29 +32,50 @@ namespace Pets_At_First_Sight
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BitmapImage z = new BitmapImage(new Uri("Imagens\\NoImage.jpg", UriKind.Relative));
-
-            if (criar_localidade.Text == "" || criar_nome.Text == "" || criar_username.Text == "")
-            {
-                MessageBox.Show("Existem 1 ou mais campos em branco!");
-            }
+            bool passedValidation = true;
 
             if (CheckUsername(criar_username.Text.ToString()) == false)
             {
-                MessageBox.Show("Já existe uma conta associada a esse username.");
-                criar_username.Text = "";
+                passedValidation = false;
+            }
+
+            if(CheckName(criar_nome.Text.ToString()) == false)
+            {
+                passedValidation = false;
             }
 
             if (IsValidMailAddress(criar_email.Text.ToString()) == false)
             {
                 MessageBox.Show("Email inválido!");
-                criar_email.Text = "";
-            } else if (IsValidMailAddress(criar_email.Text.ToString()) == true)
+                passedValidation = false;
+
+            }
+            else if (IsValidMailAddress(criar_email.Text.ToString()) == true)
             {
                 if (CheckEmail(criar_email.Text.ToString()) == false)
                 {
-                    MessageBox.Show("Já existe uma conta associada a esse email.");
-                    criar_email.Text = "";
+                    passedValidation = false;
                 }
+            }
+
+            if (criar_localidade.Text.Length > 100)
+            {
+                MessageBox.Show("Morada demasiado longa.\nTente colocar algo abaixo de 100 caracteres.");
+                passedValidation = false;
+            }
+
+            // checking if any mandadory fields are empty
+            if (criar_pass.Password == "")
+            {
+                passedValidation = false;
+                MessageBox.Show("Existem 1 ou mais campos em branco!");
+            }
+
+            
+            if (criar_pass.Password.Length > 100)
+            {
+                passedValidation = false;
+                MessageBox.Show("Localidade demasiado longa. Inválido!");
             }
 
             if (IsValidPass(criar_pass.Password.ToString()) == false)
@@ -72,56 +96,86 @@ namespace Pets_At_First_Sight
             }
 
         }
-
-        public bool CheckEmail(string email)
-        {
-            int exist = 0;
-            foreach (Conta c in Container.contas)
-            {
-                if (email == c.Email.ToString())
-                {
-                    exist = exist + 1;
-                }
-            }
-            if (exist == 0)
-            {
-                return true;
-            } else if (exist > 0) // nomeadamente se for 1, é porque já existe alguém com esse email
-            {
-                return false;
-            } else
-            {
-                return false;
-            }
-        }
-
         public bool CheckUsername(string username)
         {
-            int exist = 0;
-            foreach (Conta c in Container.contas)
+            //checking length
+            if (username == "")
             {
-                if (username == c.Username.ToString())
-                {
-                    exist = exist + 1;
-                }
+                MessageBox.Show("O username deve ser preenchido.");
+                return false;
             }
-            if (exist == 0)
+            else if (username.Length > 20)
             {
-                return true;
-            }
-            else if (exist > 0) // nomeadamente se for 1, é porque já existe alguém com esse username
-            {
+                MessageBox.Show("Username demasiado longo.\nTente colocar algo abaixo de 20 caracteres.");
                 return false;
             }
             else
             {
+                //checking db for an already existing username
+                SQLServerConnection.openConnection();
+                SQLServerConnection.sql = "EXEC @exists = projeto.ValidarLogin_Username @username";
+                SQLServerConnection.command.Parameters.AddWithValue("@username", username);
+                SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
+                SQLServerConnection.command.CommandType = CommandType.Text;
+                SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+                SQLServerConnection.closeConnection();
+
+                if ((int)exists.Value == 1)
+                {
+                    MessageBox.Show("Já existe uma conta associada a esse username.");
+                    return false;
+                }
+                return true;
+            }
+
+        }
+
+        private bool CheckName(string nome)
+        {
+            if (nome == "")
+            {
+                MessageBox.Show("O nome deve ser preenchido.");
                 return false;
             }
+            if (nome.Length > 50)
+            {
+                MessageBox.Show("Nome demasiado longo.\nTente colocar algo abaixo de 05 caracteres.");
+                return false;
+            }
+            return true;
         }
 
         private bool IsValidMailAddress(string mailAddress)
         {
-            return Regex.IsMatch(mailAddress, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (mailAddress.Length > 75)
+            {
+                MessageBox.Show("Email demasiado longo.\nTente colocar algo abaixo de 75 caracteres.");
+                return false;
+            }
+            else
+            {
+                return Regex.IsMatch(mailAddress, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            }
+            
+        }
+
+        public bool CheckEmail(string email)
+        {
+            //checking db for an already existing email
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "EXEC @exists = projeto.ValidarConta_Email @email";
+            SQLServerConnection.command.Parameters.AddWithValue("@email", email);
+            SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.closeConnection();
+
+            if ((int)exists.Value == 1)
+            {
+                MessageBox.Show("Já existe uma conta associada a esse email.");
+                return false;
+            }
+            return true;
         }
 
         private bool IsValidPass(string pass) // para validar a password de input do login; no caso da criação de conta, terá de confirmar

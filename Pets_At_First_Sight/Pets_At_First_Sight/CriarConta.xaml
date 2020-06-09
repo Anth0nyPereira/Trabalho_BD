@@ -17,11 +17,11 @@
         </Button>
         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25"  Content="Criar Conta" HorizontalAlignment="Left" Margin="125,559,0,0" VerticalAlignment="Top" Width="124" Height="49" Click="Button_Click" ToolTip="Entrar">
         </Button>
-        <TextBox Name="criar_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,260,54,364" />
+        <TextBox Name="criar_username" materialDesign:HintAssist.Hint="Username*" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,260,54,364" />
         <TextBox Name="criar_localidade" materialDesign:HintAssist.Hint="Localidade" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="17,440,57,184" Height="43" />
-        <TextBox Name="criar_nome" materialDesign:HintAssist.Hint="Nome" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,200,54,424" />
-        <TextBox Name="criar_email" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,318,54,306" />
-        <PasswordBox x:Name="criar_pass" Height="38" materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" VerticalAlignment="Center" Margin="20,384,54,245" />
+        <TextBox Name="criar_nome" materialDesign:HintAssist.Hint="Nome*" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,200,54,424" />
+        <TextBox Name="criar_email" materialDesign:HintAssist.Hint="Email*" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="138,318,54,306" />
+        <PasswordBox x:Name="criar_pass" Height="38" materialDesign:HintAssist.Hint="Password*" materialDesign:TextFieldAssist.HasClearButton="True" VerticalAlignment="Center" Margin="20,384,54,245" />
         <Button Background="Transparent" BorderThickness="0" Margin="70,492,72,143" Click="Button_Click_2">
             <Label Content="Já tem conta?"/>
         </Button>
