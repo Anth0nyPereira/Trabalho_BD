@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 
 namespace Pets_At_First_Sight
 {
-   
+
     public partial class CriarConta : Page
     {
         public CriarConta()
@@ -31,17 +31,31 @@ namespace Pets_At_First_Sight
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BitmapImage z = new BitmapImage(new Uri("Imagens\\NoImage.jpg", UriKind.Relative));
+            String username = null;
+            String nome = null;
+            String email = null;
+            String localidade = null;
+            String pass = null;
+            String foto = InputImage.Source.ToString();
+
             bool passedValidation = true;
 
             if (CheckUsername(criar_username.Text.ToString()) == false)
             {
                 passedValidation = false;
             }
+            else
+            {
+                username = criar_username.Text;
+            }
 
-            if(CheckName(criar_nome.Text.ToString()) == false)
+            if (CheckName(criar_nome.Text.ToString()) == false)
             {
                 passedValidation = false;
+            }
+            else
+            {
+                nome = criar_nome.Text;
             }
 
             if (IsValidMailAddress(criar_email.Text.ToString()) == false)
@@ -56,46 +70,80 @@ namespace Pets_At_First_Sight
                 {
                     passedValidation = false;
                 }
+                else
+                {
+                    email = criar_email.Text;
+                }
             }
+            
 
             if (criar_localidade.Text.Length > 100)
             {
                 MessageBox.Show("Morada demasiado longa.\nTente colocar algo abaixo de 100 caracteres.");
                 passedValidation = false;
             }
+            else if (!String.IsNullOrEmpty(criar_localidade.Text))
+            {
+                localidade = criar_localidade.Text;
+            }
 
-            // checking if any mandadory fields are empty
-            if (criar_pass.Password == "")
+            if (criar_pass.Password.Length > 100 || IsValidPass(criar_pass.Password.ToString()) == false)
             {
                 passedValidation = false;
-                MessageBox.Show("Existem 1 ou mais campos em branco!");
+                MessageBox.Show("Password inválida!\nTem de conter pelo menos\n8 caracteres, 1 número\ne 1 sinal de pontuação!\nLimite de 100 caracteres!");
+            }
+            else
+            {
+                pass = criar_pass.ToString();
             }
 
-            
-            if (criar_pass.Password.Length > 100)
+            if (passedValidation)
             {
-                passedValidation = false;
-                MessageBox.Show("Localidade demasiado longa. Inválido!");
-            }
-
-            if (IsValidPass(criar_pass.Password.ToString()) == false)
-            {
-                MessageBox.Show("Password inválida!\nTem de conter pelo menos\n8 caracteres, 1 número\ne 1 sinal de pontuação!");
-                criar_pass.Password = "";
-            }
-
-            if (CheckEmail(criar_email.Text.ToString()) == true && CheckUsername(criar_username.Text.ToString()) == true && criar_username.Text != "")
-            {
-                if (IsValidMailAddress(criar_email.Text.ToString()) == true && IsValidPass(criar_pass.Password.ToString()) == true)
+                if (localidade == null)
                 {
+                    System.DBNull local = DBNull.Value;
+                    SQLServerConnection.openConnection();
+                    SQLServerConnection.sql = "projeto.InserirConta";
+                    SQLServerConnection.command.Parameters.AddWithValue("@username", username);
+                    SQLServerConnection.command.Parameters.AddWithValue("@nome", nome);
+                    SQLServerConnection.command.Parameters.AddWithValue("@email", email);
+                    SQLServerConnection.command.Parameters.AddWithValue("@morada", local);
+                    SQLServerConnection.command.Parameters.AddWithValue("@fotografia", foto);
+                    SQLServerConnection.command.Parameters.AddWithValue("@pass", pass);
+                    SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+                    SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+                    SQLServerConnection.command.ExecuteNonQuery();
+                    SQLServerConnection.closeConnection();
+                    SQLServerConnection.command.Parameters.Clear();
+
                     MessageBox.Show("Conta criada com sucesso!");
-                    Container.contas.Add(new Conta() { Email = criar_email.Text.ToString(), Pass = criar_pass.Password.ToString(), NomePessoa = criar_nome.Text.ToString(), Username = criar_username.Text.ToString(), TipoConta = "Particular", Localidade = criar_localidade.Text.ToString(), Foto = InputImage.Source.ToString() });
+                    Login login = new Login();
+                    this.NavigationService.Navigate(login);
+                }
+                else
+                {
+                    SQLServerConnection.openConnection();
+                    SQLServerConnection.sql = "projeto.InserirConta";
+                    SQLServerConnection.command.Parameters.AddWithValue("@username", username);
+                    SQLServerConnection.command.Parameters.AddWithValue("@nome", nome);
+                    SQLServerConnection.command.Parameters.AddWithValue("@email", email);
+                    SQLServerConnection.command.Parameters.AddWithValue("@morada", localidade);
+                    SQLServerConnection.command.Parameters.AddWithValue("@fotografia", foto);
+                    SQLServerConnection.command.Parameters.AddWithValue("@pass", pass);
+                    SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+                    SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+                    SQLServerConnection.command.ExecuteNonQuery();
+                    SQLServerConnection.closeConnection();
+                    SQLServerConnection.command.Parameters.Clear();
+
+                    MessageBox.Show("Conta criada com sucesso!");
                     Login login = new Login();
                     this.NavigationService.Navigate(login);
                 }
             }
 
         }
+
         public bool CheckUsername(string username)
         {
             //checking length
@@ -113,19 +161,28 @@ namespace Pets_At_First_Sight
             {
                 //checking db for an already existing username
                 SQLServerConnection.openConnection();
-                SQLServerConnection.sql = "EXEC @exists = projeto.ValidarLogin_Username @username";
+                SQLServerConnection.sql = "SELECT projeto.ValidarLogin_Username(@username) AS result;";
                 SQLServerConnection.command.Parameters.AddWithValue("@username", username);
-                SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
                 SQLServerConnection.command.CommandType = CommandType.Text;
                 SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-                SQLServerConnection.closeConnection();
+                SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
 
-                if ((int)exists.Value == 1)
+                bool output = false;
+                while (SQLServerConnection.reader.Read())
                 {
-                    MessageBox.Show("Já existe uma conta associada a esse username.");
-                    return false;
+                    output = (bool)SQLServerConnection.reader["result"];
+                    MessageBox.Show("Não pode entrar neste else: " + output.ToString());
                 }
-                return true;
+
+                SQLServerConnection.closeConnection();
+                SQLServerConnection.command.Parameters.Clear();
+
+                if (output.ToString().Equals("True"))
+                {
+                    MessageBox.Show("Username já associado a uma conta.");
+                }
+
+                return !output;
             }
 
         }
@@ -139,7 +196,7 @@ namespace Pets_At_First_Sight
             }
             if (nome.Length > 50)
             {
-                MessageBox.Show("Nome demasiado longo.\nTente colocar algo abaixo de 05 caracteres.");
+                MessageBox.Show("Nome demasiado longo.\nTente colocar algo abaixo de 50 caracteres.");
                 return false;
             }
             return true;
@@ -156,35 +213,43 @@ namespace Pets_At_First_Sight
             {
                 return Regex.IsMatch(mailAddress, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             }
-            
+
         }
 
         public bool CheckEmail(string email)
         {
-            //checking db for an already existing email
+            //checking db for an already existing username
             SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "EXEC @exists = projeto.ValidarConta_Email @email";
+            SQLServerConnection.sql = "SELECT projeto.ValidarLogin_Email(@email) AS result;";
             SQLServerConnection.command.Parameters.AddWithValue("@email", email);
-            SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.closeConnection();
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
 
-            if ((int)exists.Value == 1)
+            bool output = false;
+            while (SQLServerConnection.reader.Read())
             {
-                MessageBox.Show("Já existe uma conta associada a esse email.");
-                return false;
+                output = (bool)SQLServerConnection.reader["result"];
+                MessageBox.Show("email: " + output.ToString());
             }
-            return true;
+
+            SQLServerConnection.closeConnection();
+            SQLServerConnection.command.Parameters.Clear();
+
+            if (output.ToString().Equals("True"))
+            {
+                MessageBox.Show("Email já associado a uma conta.");
+            }
+
+            return !output;
         }
 
-        private bool IsValidPass(string pass) // para validar a password de input do login; no caso da criação de conta, terá de confirmar
-                                              // a utilização e pelo menos um caracter numérico e ainda um sinal de pontuação
+        private bool IsValidPass(string pass) // confirmar a utilização de pelo menos um caracter numérico e um sinal de pontuação
         {
             int length = pass.Length;
             bool containsInt = pass.Any(char.IsDigit);
             bool containsPonct = pass.IndexOfAny(".,;:^~='?!-_>&$%#<>".ToCharArray()) != -1;
-            if (length >= 8 && containsInt == true && containsPonct == true)
+            if (length >= 8 && length <= 20 && containsInt == true && containsPonct == true)
             {
                 return true;
             }
