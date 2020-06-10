@@ -24,10 +24,11 @@ namespace Pets_At_First_Sight
         public static List<ANIMAL> animais = new List<ANIMAL>();
         public static List<ANIMAL> favoritos = new List<ANIMAL>();
         public static List<ANIMAL> adocoes = new List<ANIMAL>();
-        public static List<ANIMAL> animal_selecionado = new List<ANIMAL>();
+        public static int animal_selecionado;
+        //public static List<ANIMAL> animal_selecionado = new List<ANIMAL>();
         public static List<Produto> produtos = new List<Produto>();
         public static List<Conta> contas = new List<Conta>();
-        public static List<Conta> utilizador_logado = new List<Conta>();
+        //public static List<Conta> utilizador_logado = new List<Conta>();
         public static String current_user;
 
     }
@@ -38,11 +39,6 @@ namespace Pets_At_First_Sight
             InitializeComponent();
             String s = "Imagens\\";
 
-            Container.animais.Add(new ANIMAL() { Nome = "Cão Fofo", Idade = "5 meses", Genero = "Masculino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "Filipa", Tipo_Doador = "Abrigo", Vacinas = "Sim", Chip="Sim", Mensagem="fuhsd", Adotado=false, Favorito=false });
-            Container.animais.Add(new ANIMAL() { Nome = "Princesa", Idade = "10 anos", Genero = "Feminino", Raca = "Gato", Url_Image = s + "stock_gato1.jpg", User_Name = "M0dernCaty0ga", Tipo_Doador = "Abrigo", Vacinas = "Sim", Chip = "Não", Mensagem = "fuhsd", Adotado = false, Favorito = false });
-            Container.animais.Add(new ANIMAL() { Nome = "Piu", Idade = "5 anos", Genero = "Feminino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "M0dernCaty0ga", Tipo_Doador = "Particular", Vacinas = "Sim", Chip = "Sim", Mensagem = "fuhsd", Adotado = false, Favorito = false });
-            Container.animais.Add(new ANIMAL() { Nome = "Gato das Botas", Idade = "7 anos", Genero = "Masculino", Raca = "Gato", Url_Image = s + "stock_gato1.jpg", User_Name = "Alex42000", Tipo_Doador = "Abrigo", Vacinas = "Não", Chip = "Sim", Mensagem = "fuhsd", Adotado = false, Favorito = false });
-            Container.animais.Add(new ANIMAL() { Nome = "Simba", Idade = "2 anos", Genero = "Masculino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "J0hnnySoares", Tipo_Doador = "Particular", Vacinas = "Não", Chip = "Sim", Mensagem = "Cão Muito engraçado", Adotado = false, Favorito = false });
             // separador
             Container.produtos.Add(new Produto() { ID = "1000", TipoServico = "Produto", NomeProduto = "Roupão para cão", Empresa="Empresa A", Preco = "5,95", uImage= s + "escova_cabelo.jpg" });
             Container.produtos.Add(new Produto() { ID = "1001", TipoServico = "Produto", NomeProduto = "Roupão para gato", Empresa = "Empresa B", Preco = "6,95", uImage = s + "escova_cabelo.jpg" });

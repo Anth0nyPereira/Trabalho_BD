@@ -94,7 +94,7 @@ namespace Pets_At_First_Sight
             }
             else
             {
-                pass = criar_pass.ToString();
+                pass = criar_pass.Password.ToString();
             }
 
             if (passedValidation)
@@ -115,7 +115,6 @@ namespace Pets_At_First_Sight
                     SQLServerConnection.command.ExecuteNonQuery();
                     SQLServerConnection.closeConnection();
                     SQLServerConnection.command.Parameters.Clear();
-
                     MessageBox.Show("Conta criada com sucesso!");
                     Login login = new Login();
                     this.NavigationService.Navigate(login);
@@ -171,7 +170,6 @@ namespace Pets_At_First_Sight
                 while (SQLServerConnection.reader.Read())
                 {
                     output = (bool)SQLServerConnection.reader["result"];
-                    MessageBox.Show("Não pode entrar neste else: " + output.ToString());
                 }
 
                 SQLServerConnection.closeConnection();
@@ -230,7 +228,6 @@ namespace Pets_At_First_Sight
             while (SQLServerConnection.reader.Read())
             {
                 output = (bool)SQLServerConnection.reader["result"];
-                MessageBox.Show("email: " + output.ToString());
             }
 
             SQLServerConnection.closeConnection();

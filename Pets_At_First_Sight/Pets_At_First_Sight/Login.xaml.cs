@@ -144,7 +144,6 @@ namespace Pets_At_First_Sight
             while (SQLServerConnection.reader.Read())
             {
                 output = (bool)SQLServerConnection.reader["result"];
-                MessageBox.Show(output.ToString());
             }
             SQLServerConnection.closeConnection();
             
@@ -190,7 +189,6 @@ namespace Pets_At_First_Sight
             while (SQLServerConnection.reader.Read())
             {
                 output = (bool)SQLServerConnection.reader["result"];
-                MessageBox.Show(output.ToString());
             }
             SQLServerConnection.closeConnection();
 
@@ -202,6 +200,7 @@ namespace Pets_At_First_Sight
             else
             {
                 MessageBox.Show("não existe uma conta associada a essa pass.");
+                MessageBox.Show(SHA512function(pass));
                 return false;
             }
 

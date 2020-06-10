@@ -1,8 +1,11 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Pets_At_First_Sight.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,9 +26,105 @@ namespace Pets_At_First_Sight
         {
 
             InitializeComponent();
-
+            GetAnimals();
             Posts.ItemsSource = Container.animais;
             CollectionViewSource.GetDefaultView(Container.animais).Refresh();
+
+        }
+
+        public void GetAnimals()
+        {
+            Container.animais.Clear();
+
+            SQLServerConnection.openConnection();
+
+            SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ANIMAIS;";
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            SQLServerConnection.command.Parameters.Clear();
+           
+            while (SQLServerConnection.reader.Read())
+            {
+                ANIMAL animal = new ANIMAL();
+                animal.Id = (int)SQLServerConnection.reader["id"];
+                animal.Nome = SQLServerConnection.reader["nome"].ToString();
+                animal.Especie = SQLServerConnection.reader["especie"].ToString();
+                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
+                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
+                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+
+
+                if(SQLServerConnection.reader["tipo"].ToString() == "Particular")
+                {
+                    animal.Tipo_Doador = "particular";
+                }
+                else
+                {
+                    animal.Tipo_Doador = "abrigo";
+                }
+
+
+                if (SQLServerConnection.reader["raca"].ToString() == "cao")
+                {
+                    animal.Raca = "cão";
+                }
+                else
+                {
+                    animal.Raca = SQLServerConnection.reader["raca"].ToString();
+                }
+
+
+                if (SQLServerConnection.reader["genero"].ToString() == "F")
+                {
+                    animal.Genero = "feminino";
+                }
+                else
+                {
+                    animal.Genero = "masculino";
+                }
+
+                if (SQLServerConnection.reader["vacina"].ToString() == "T")
+                {
+                    animal.Vacinas = "sim";
+                }
+                else
+                {
+                    animal.Vacinas = "não";
+                }
+
+                if (SQLServerConnection.reader["chip"].ToString() == "T")
+                {
+                    animal.Chip = "sim";
+                }
+                else
+                {
+                    animal.Chip = "não";
+                }
+
+                if ((int)SQLServerConnection.reader["idade"] == 1)
+                {
+                    animal.Idade = "1 mês";
+                }
+                else if ((int)SQLServerConnection.reader["idade"] < 12)
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] + " meses";
+                }
+                else if((int)SQLServerConnection.reader["idade"] < 24)
+                {
+                    animal.Idade = "1 ano";
+                }
+                else
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
+                }
+
+                animal.Adotado = false;
+                animal.Favorito = false;
+
+                Container.animais.Add(animal);
+            }
+            SQLServerConnection.closeConnection();
 
         }
 
@@ -52,17 +151,6 @@ namespace Pets_At_First_Sight
                 Posts.ItemsSource = Container.animais;
 
             }
-        }
-        private void Dados_Originais()
-        {
-            String s = "Imagens\\";
-
-            Container.animais.Add(new ANIMAL() { Nome = "Cãoasdasd", Idade = "5 meses", Genero = "Masculino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "Filipa" });
-            Container.animais.Add(new ANIMAL() { Nome = "Princesa", Idade = "10 anos", Genero = "Feminino", Raca = "Gato", Url_Image = s + "stock_gato1.jpg", User_Name = "Anthony Pereira" });
-            Container.animais.Add(new ANIMAL() { Nome = "Piu", Idade = "5 anos", Genero = "Feminino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "Anthony Pereira" });
-            Container.animais.Add(new ANIMAL() { Nome = "No Name", Idade = "7 anos", Genero = "Feminino", Raca = "Gato", Url_Image = s + "stock_gato1.jpg", User_Name = "Alexandra" });
-            Container.animais.Add(new ANIMAL() { Nome = "Stock#1", Idade = "8 meses", Genero = "Masculino", Raca = "Cão", Url_Image = s + "stock_dog1.jpg", User_Name = "João" });
-            Posts.ItemsSource = Container.animais;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -182,27 +270,11 @@ namespace Pets_At_First_Sight
 
         private void ViewPost(object sender, MouseButtonEventArgs e)
         {
-
-            Grid gr = (Grid)sender;
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
-
-            String Nome_Animal = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
-
-            foreach (ANIMAL animal in Container.animais)
-            {
-                if (animal.Nome == Nome_Animal && animal.Idade == Idades && animal.Raca == Raca && animal.Genero == genero)
-                {
-                    Container.animal_selecionado.Add(animal);
-                }
-            }
-            Post_MaisInfo post_MaisInfo = new Post_MaisInfo();
-            NavigationService.Navigate(post_MaisInfo);
+           Grid grd = (Grid)sender;
+           Label id = (Label)grd.Children[6];
+           Container.animal_selecionado = Int32.Parse(id.Content.ToString());
+           Post_MaisInfo post_MaisInfo = new Post_MaisInfo();
+           NavigationService.Navigate(post_MaisInfo);
         }
     }
 

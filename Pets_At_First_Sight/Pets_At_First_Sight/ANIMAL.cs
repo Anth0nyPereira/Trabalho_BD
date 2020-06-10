@@ -8,7 +8,9 @@ namespace Pets_At_First_Sight
 {
     class ANIMAL
     {
+		private int _Id;
         private String _Nome;
+		private String _Especie;
 		private String _Raca;
 		private String _Idade;
         private String _Genero;
@@ -22,6 +24,12 @@ namespace Pets_At_First_Sight
 		private bool _Favorito;
 		private String _ChangeAdoptIcon;
 		private String _ChangeHeartIcon;
+
+		public int Id
+		{
+			get { return _Id; }
+			set { _Id = value; }
+		}
 
 		public String Nome
 		{
@@ -43,6 +51,12 @@ namespace Pets_At_First_Sight
 		{
 			get { return _Genero; }
 			set { _Genero = value; }
+		}
+
+		public String Especie
+		{
+			get { return _Especie; }
+			set { _Especie = value; }
 		}
 
 		public String Raca
