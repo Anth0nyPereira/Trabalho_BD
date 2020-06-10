@@ -110,3 +110,5 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.csproj.CopyComplete
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.exe
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.pdb
+C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Bogus.dll
+C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Bogus.xml

@@ -13,7 +13,7 @@
         </Image>
         <Button Name="Entrar" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25"  Content="Entrar" HorizontalAlignment="Left" Margin="125,521,0,0" VerticalAlignment="Top" Width="124" Height="49" Click="Button_Click" ToolTip="Entrar">
         </Button>
-        <TextBox Name="Email" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,312" />
+        <TextBox Name="Username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,312" />
         <PasswordBox x:Name="PasswordBox" Height="38" materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" VerticalAlignment="Center" Margin="54,388,54,241" />
         <Button Background="Transparent" BorderThickness="0" Height="35" Margin="70,430,72,205" Click="Button_Click_1">
             <Label Content="Esqueceu-se da palavra passe?"/>
