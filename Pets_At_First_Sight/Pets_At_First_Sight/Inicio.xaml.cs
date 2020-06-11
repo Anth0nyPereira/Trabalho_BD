@@ -48,6 +48,7 @@ namespace Pets_At_First_Sight
                 ANIMAL animal = new ANIMAL();
                 animal.Id = (int)SQLServerConnection.reader["id"];
                 animal.Nome = SQLServerConnection.reader["nome"].ToString();
+                MessageBox.Show(animal.Nome);
                 animal.Raca = SQLServerConnection.reader["raca"].ToString();
                 animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
                 animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
@@ -230,7 +231,6 @@ namespace Pets_At_First_Sight
             InicioFiltros inicioFiltros = new InicioFiltros();
             NavigationService.Navigate(inicioFiltros);
         }
-        Boolean flagAdo = true;
 
         public void Adopt(object sender, RoutedEventArgs e)
         {
@@ -248,7 +248,8 @@ namespace Pets_At_First_Sight
             SQLServerConnection.command.ExecuteNonQuery();
             SQLServerConnection.closeConnection();
             SQLServerConnection.command.Parameters.Clear();
-
+            new Inicio();
+            new Adocoes();
         }
 
         private void ViewPost(object sender, MouseButtonEventArgs e)

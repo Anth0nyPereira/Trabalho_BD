@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\SQLServerConnection.cs" />
+    <Compile Include="CompraProduto.xaml.cs">
+      <DependentUpon>CompraProduto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Conta.cs" />
     <Compile Include="CriarConta.xaml.cs">
       <DependentUpon>CriarConta.xaml</DependentUpon>
@@ -77,9 +80,6 @@
     </Compile>
     <Compile Include="ViewPost_Adocoes.xaml.cs">
       <DependentUpon>ViewPost_Adocoes.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewPost_Favoritos.xaml.cs">
-      <DependentUpon>ViewPost_Favoritos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewPost_Perfil.xaml.cs">
       <DependentUpon>ViewPost_Perfil.xaml</DependentUpon>
@@ -91,11 +91,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CriarConta.xaml">
+    <Page Include="CompraProduto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Favoritos.xaml">
+    <Page Include="CriarConta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,9 +130,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Favoritos.xaml.cs">
-      <DependentUpon>Favoritos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inicio.xaml.cs">
       <DependentUpon>Inicio.xaml</DependentUpon>
@@ -174,10 +171,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewPost_Adocoes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewPost_Favoritos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

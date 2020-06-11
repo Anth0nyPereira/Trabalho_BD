@@ -8,14 +8,15 @@ namespace Pets_At_First_Sight
 {
     class Produto
     {
-        private String _ID;
+        private int _ID;
         private String _NomeProduto;
         private String _TipoServico;
         private String _Preco;
 		private String _Empresa;
 		private String _uImage;
+		private int _Stock;
 
-		public String ID
+		public int ID
 		{
 			get { return _ID; }
 			set { _ID = value; }
@@ -48,5 +49,10 @@ namespace Pets_At_First_Sight
 			set { _uImage = value; }
 		}
 
+		public int Stock
+		{
+			get { return _Stock; }
+			set { _Stock = value; }
+		}
 	}
 }

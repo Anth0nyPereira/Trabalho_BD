@@ -62,7 +62,7 @@
             <ComboBoxItem Content="13 anos"/>
             <ComboBoxItem Content="14 anos"/>
             <ComboBoxItem Content="15 anos"/>
-            
+
         </ComboBox>
 
         <!--ESPÉCIE-->
@@ -73,18 +73,15 @@
         </ComboBox>
 
         <!--GÉNERO-->
-        <Label Height="35" FontSize="20" VerticalAlignment="Top" Content="Género:" Margin="10,254,15,0" Grid.Column="1"/>
-        <ComboBox FontSize="18" x:Name="GeneroAnimal" Height="34" Margin="10,247,10,386" Grid.Column="2" >
+        <Label Height="35" FontSize="20" VerticalAlignment="Top" Content="Género:" Margin="10,313,15,0" Grid.Column="1"/>
+        <ComboBox FontSize="18" x:Name="GeneroAnimal" Height="34" Margin="10,308,10,325" Grid.Column="2" >
             <ComboBoxItem Content="Masculino"/>
             <ComboBoxItem Content="Feminino"/>
         </ComboBox>
 
         <!--TIPO DOADOR-->
-        <Label Height="35" FontSize="18" VerticalAlignment="Top" Content="Tipo doador:" Margin="135,315,15,0" Grid.ColumnSpan="2"/>
-        <ComboBox FontSize="18" x:Name="TipoDoador" Height="37" Margin="10,304,10,326" Grid.Column="2">
-            <ComboBoxItem IsSelected="True" Content="Abrigo"/>
-            <ComboBoxItem Content="Particular"/>
-        </ComboBox>
+        <Label Height="35" FontSize="18" VerticalAlignment="Top" Content="Raça:" Margin="37,258,14,0" Grid.Column="1"/>
+        <TextBox x:Name="RacaAnimal" Margin="10,248,10,384" Height="35" Grid.Column="2"/>
 
         <!--VACINAS-->
         <Label FontSize="18" Height="35" VerticalAlignment="Top"  Content="Vacinas:" Margin="15,375,18,0" Grid.Column="1"/>

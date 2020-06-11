@@ -24,7 +24,6 @@ namespace Pets_At_First_Sight
         public InicioFiltros()
         {
             InitializeComponent();
-            int num_filters = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -160,9 +159,6 @@ namespace Pets_At_First_Sight
                 {
                     animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                 }
-
-                animal.Adotado = false;
-                animal.Favorito = false;
 
                 Filtrar.Add(animal);
             }

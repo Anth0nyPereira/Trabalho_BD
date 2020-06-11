@@ -1,0 +1,59 @@
+﻿<Page x:Class="Pets_At_First_Sight.CompraProduto"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Pets_At_First_Sight"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Height="667" Width="375" Background="#DCE3E7"
+      Title="CompraProduto">
+
+    <Grid>
+        <Label x:Name="Titulo_Loja" Content="Comprar Produto" Margin="78,40,77,583" FontFamily="Arial" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" Height="44"/>
+        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Back">
+            <materialDesign:PackIcon
+                    Kind="ArrowBack"
+                    Height="24"
+                    Width="24" />
+        </Button>
+        <StackPanel Margin="42,164,45,383">
+            <Label FontWeight="Bold" FontFamily="Arial" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="44" Width="288">Método de Pagamento:</Label>
+            <StackPanel Orientation="Vertical">
+                <RadioButton x:Name="CM" IsChecked="True">Cartão Multibanco</RadioButton>
+                <RadioButton x:Name="TB">Transferência Bancária</RadioButton>
+                <RadioButton x:Name="MBW">MB Way</RadioButton>
+                <RadioButton x:Name="PP">Paypal</RadioButton>
+            </StackPanel>
+        </StackPanel>
+
+        <ComboBox
+                  x:Name="quantidade"
+                  MinWidth="72"
+                  IsEditable="True"
+                  ItemsSource="{Binding LongListToTestComboVirtualization}" Margin="209,360,0,279" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
+            <ComboBox.Text>
+                <Binding    
+                      Path="SelectedTextTwo"
+                      Mode="TwoWay"
+                      UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </ComboBox.Text>
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+        <Label FontWeight="Bold" FontFamily="Arial" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,360,192,267" Content="Quantidade:"/>
+        <Button
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Height="50"
+            materialDesign:ButtonAssist.CornerRadius="25"
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Margin="103,496,105,121" Click="Buy">
+            <TextBlock
+                Text="Comprar" />
+        </Button>
+    </Grid>
+</Page>

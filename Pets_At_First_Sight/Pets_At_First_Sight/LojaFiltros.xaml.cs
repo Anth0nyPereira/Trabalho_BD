@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Pets_At_First_Sight.Classes;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,36 +40,36 @@ namespace Pets_At_First_Sight
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            List<Produto> FiltrarProduto = new List<Produto>();
+            List<Produto> Filtrar = new List<Produto>();
+            String tipo = Tipo.SelectedItem.ToString();
+            int preco = Int32.Parse(PrecoMax.Text.ToString());
+            System.DBNull empresa = DBNull.Value;
 
-            foreach (Produto prod in Container.produtos)
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarProduto(@tipo , @preco, @empresa)";
+            SQLServerConnection.command.Parameters.AddWithValue("@especie", tipo == null ? (object)DBNull.Value : tipo);
+            SQLServerConnection.command.Parameters.AddWithValue("@preco", preco == 0 ? (object)DBNull.Value : preco);
+            SQLServerConnection.command.Parameters.AddWithValue("@empresa", empresa);
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            while (SQLServerConnection.reader.Read())
             {
-                FiltrarProduto.Add(prod);
+                Produto prod = new Produto();
+                prod.ID = (int)SQLServerConnection.reader["id"];
+                prod.NomeProduto = SQLServerConnection.reader["p_name"].ToString();
+                prod.TipoServico = SQLServerConnection.reader["tipo"].ToString();
+                prod.Stock = (int)SQLServerConnection.reader["quantidade"];
+                prod.Preco = SQLServerConnection.reader["preco"].ToString();
+                prod.Empresa = SQLServerConnection.reader["nome"].ToString();
+
+                Filtrar.Add(prod);
             }
+            SQLServerConnection.closeConnection();
 
-            foreach (Produto prod in Container.produtos)
-            {
-                if (FiltrarProduto.Contains(prod) && Tipo.SelectedItem != null && !prod.TipoServico.Equals(Tipo.Text.ToString()))
-                {
-                    FiltrarProduto.Remove(prod);
-                }
-
-                double price = Convert.ToDouble(prod.Preco);
-
-                if (FiltrarProduto.Contains(prod) && slide2.Value != 0 && (price > slide2.Value))
-                {
-                    FiltrarProduto.Remove(prod);
-                }
-
-                if (FiltrarProduto.Contains(prod) && Empresa.SelectedItem != null && !prod.Empresa.Equals(Empresa.Text.ToString()))
-                {
-                    FiltrarProduto.Remove(prod);
-                }
-            }
             Loja loja = new Loja();
-            loja.My_Loja.ItemsSource = FiltrarProduto;
+            loja.My_Loja.ItemsSource = Filtrar;
             this.NavigationService.Navigate(loja);
-
         }
     }
 }

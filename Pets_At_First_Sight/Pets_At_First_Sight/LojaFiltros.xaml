@@ -60,18 +60,19 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Width="162" Margin="0,0,0,62" Grid.RowSpan="2">
                 <Slider Name="slide2" Maximum="50" Margin="2,22,2,23" Width="113"/>
-                <TextBox Text="{Binding ElementName=slide2, Path=Value}" BorderThickness="0" Background="Transparent" Margin="0,47,0,0" Width="42"/>
+                <TextBox x:Name="PrecoMax" Text="{Binding ElementName=slide2, Path=Value}" BorderThickness="0" Background="Transparent" Margin="0,47,0,0" Width="42"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Width="168" Margin="0,0,0,62" Grid.RowSpan="2">
+            <!--<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Width="168" Margin="0,0,0,62" Grid.RowSpan="2">
                 <Label Margin="2,22,2,0" Width="125" FontSize="20" Height="Auto" Content="Empresa:"/>
             </StackPanel>
+            
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"  Width="162" Margin="0,0,0,50" Grid.RowSpan="2">
                 <ComboBox x:Name="Empresa" Margin="2,22,2,23" Width="113">
                     <ComboBoxItem>Empresa A</ComboBoxItem>
                     <ComboBoxItem>Empresa B</ComboBoxItem>
                 </ComboBox>
-            </StackPanel>
+            </StackPanel>-->
             <StackPanel Grid.Column="0" Grid.Row="7" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="123,21,123,0">
                 <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25"  Content="Filtrar" HorizontalAlignment="Center" Margin="0,0,0,0" Width="124" Height="49" ToolTip="Filtrar" VerticalAlignment="Bottom" Click="Button_Click_1"/>
             </StackPanel>

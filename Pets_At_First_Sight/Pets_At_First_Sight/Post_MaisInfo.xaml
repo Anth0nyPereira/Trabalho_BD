@@ -15,7 +15,7 @@
     <ItemsControl Name="Post_Template" >
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Grid Background="#b2bfdb" HorizontalAlignment="Right" Width="375" Initialized="LoadGrid">
+                <Grid Background="#b2bfdb" HorizontalAlignment="Right" Width="375" Loaded="LoadGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="224*"/>
                         <ColumnDefinition Width="151*"/>
@@ -67,7 +67,7 @@
 
                     <!--CHIP-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,0,144.2,129.2" Content="Chip:" VerticalAlignment="Bottom" Height="37" Width="55" Grid.ColumnSpan="2"/>
-                    <Label Name="PostChip" HorizontalContentAlignment="Left" FontSize="18"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,501,0.2,131.2" Height="Auto" Content="{Binding Chip}" Grid.Column="1"/>
+                    <Label Name="PostChip" HorizontalContentAlignment="Left" FontSize="18"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,501,0.2,131.2" Height="Auto" Grid.Column="1"/>
 
                     <!--MENSAGEM-->
                     <Border Height="75" BorderThickness="0"  BorderBrush="#FF000000" Margin="47,0,28.2,27.2" VerticalAlignment="Bottom" Grid.ColumnSpan="2">

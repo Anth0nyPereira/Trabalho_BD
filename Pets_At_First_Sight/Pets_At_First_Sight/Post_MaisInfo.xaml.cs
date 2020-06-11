@@ -24,7 +24,6 @@ namespace Pets_At_First_Sight
         public Post_MaisInfo()
         {
             InitializeComponent();
-            //Post_Template.ItemsSource = Container.animal_selecionado;
             CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
 
         }

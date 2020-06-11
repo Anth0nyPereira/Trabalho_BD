@@ -65,7 +65,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.csprojAssemblyReference.cache
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Adocoes.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\CriarConta.g.cs
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Favoritos.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Inicio.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\InicioFiltros.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Login.g.cs
@@ -78,7 +77,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Perfil.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post_MaisInfo.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Adocoes.g.cs
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Favoritos.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Perfil.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Windows.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\App.g.cs
@@ -87,7 +85,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\App.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Adocoes.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\CriarConta.baml
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Favoritos.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Inicio.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\InicioFiltros.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Login.baml
@@ -100,7 +97,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Perfil.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post_MaisInfo.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Adocoes.baml
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Favoritos.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Perfil.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Windows.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.g.resources
@@ -114,3 +110,5 @@ C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\B
 C:\Users\Anthony\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Bogus.xml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Bogus.dll
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Bogus.xml
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\CompraProduto.g.cs
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\CompraProduto.baml

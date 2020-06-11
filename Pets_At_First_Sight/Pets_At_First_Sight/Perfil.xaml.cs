@@ -16,7 +16,6 @@ namespace Pets_At_First_Sight
         public Perfil()
         {
             InitializeComponent();
-            dados_perfil();
             List<ANIMAL> op = MeusPosts();
             My_Posts.ItemsSource = op;
         }
@@ -25,7 +24,7 @@ namespace Pets_At_First_Sight
         {
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT* FROM projeto.CONTA WHERE username=@username2";
-            SQLServerConnection.command.Parameters.AddWithValue("@username2", Container.utilizador_logado.First().Username.ToString());
+            SQLServerConnection.command.Parameters.AddWithValue("@username2", Container.current_user);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
@@ -34,35 +33,11 @@ namespace Pets_At_First_Sight
                 nome.Content = SQLServerConnection.reader["nome"];
                 email.Content = SQLServerConnection.reader["email"];
                 localidade.Content = SQLServerConnection.reader["morada"];
+                Imagem.ImageSource = new BitmapImage(new Uri(SQLServerConnection.reader["fotografia"].ToString()));
             }
+            SQLServerConnection.command.Parameters.Clear();
             SQLServerConnection.closeConnection();
         }
-
-        bool check = true;
-        private void dados_perfil()
-        {
-            String content = Container.utilizador_logado.First().Foto.ToString();
-            String z = null;
-            if (content.Contains("pack://application:"))
-            {
-                z = content;
-            } else
-            {
-                z = "pack://application:,,,/Imagens/" + content;
-            }
-
-            
-            if (content.Contains("Imagens"))
-            {
-                int found = content.IndexOf("Imagens");
-                String subs = content.Substring(found);
-                z = "pack://application:,,,/Pets_At_First_Sight;component/" + subs;
-            }
-            
-            Imagem.ImageSource= new BitmapImage(new Uri(z, UriKind.RelativeOrAbsolute));
-            username.Content = Container.utilizador_logado.First().Username.ToString();
-        }
-
 
         private void Criar_Post_Click(object sender, RoutedEventArgs e)
         {
@@ -73,40 +48,101 @@ namespace Pets_At_First_Sight
 
         private List<ANIMAL> MeusPosts() {
             List<ANIMAL> my = new List<ANIMAL>();
-            foreach (ANIMAL m in Container.animais)
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "SELECT id, projeto.ANIMAL.nome AS nome, especie, raca, genero, vacina, chip, idade, projeto.ANIMAL.fotografia AS fotografia, descricao," +
+                "dono_username, tipo FROM projeto.ANIMAL INNER JOIN projeto.CONTA ON projeto.ANIMAL.dono_username = projeto.CONTA.username WHERE dono_username=@username2";
+            SQLServerConnection.command.Parameters.AddWithValue("@username2", Container.current_user);
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            while (SQLServerConnection.reader.Read())
             {
-              
-                if (m.User_Name.Equals(username.Content.ToString()))
+                ANIMAL animal = new ANIMAL();
+                animal.Id = (int)SQLServerConnection.reader["id"];
+                animal.Nome = SQLServerConnection.reader["nome"].ToString();
+                animal.Raca = SQLServerConnection.reader["raca"].ToString();
+                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
+                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
+                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+
+                if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
-                    my.Add(m);
+                    animal.Tipo_Doador = "particular";
                 }
+                else
+                {
+                    animal.Tipo_Doador = "abrigo";
+                }
+
+
+                if (SQLServerConnection.reader["especie"].ToString() == "cao")
+                {
+                    animal.Especie = "cão";
+                }
+                else
+                {
+                    animal.Especie = SQLServerConnection.reader["especie"].ToString();
+                }
+
+
+                if (SQLServerConnection.reader["genero"].ToString() == "F")
+                {
+                    animal.Genero = "feminino";
+                }
+                else
+                {
+                    animal.Genero = "masculino";
+                }
+
+                if (SQLServerConnection.reader["vacina"].ToString() == "T")
+                {
+                    animal.Vacinas = "sim";
+                }
+                else
+                {
+                    animal.Vacinas = "não";
+                }
+
+                if (SQLServerConnection.reader["chip"].ToString() == "T")
+                {
+                    animal.Chip = "sim";
+                }
+                else
+                {
+                    animal.Chip = "não";
+                }
+
+                if ((int)SQLServerConnection.reader["idade"] == 1)
+                {
+                    animal.Idade = "1 mês";
+                }
+                else if ((int)SQLServerConnection.reader["idade"] < 12)
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] + " meses";
+                }
+                else if ((int)SQLServerConnection.reader["idade"] < 24)
+                {
+                    animal.Idade = "1 ano";
+                }
+                else
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
+                }
+                Container.animais.Add(animal);
+                my.Add(animal);
             }
+            SQLServerConnection.command.Parameters.Clear();
+            SQLServerConnection.closeConnection();
             return my;
         }
 
         private void ViewPost(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Grid gr = (Grid)sender;
-            Image u = (Image)gr.Children[0];
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
-
-            String Nome_Animal = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
-
-            foreach (ANIMAL animal in Container.animais)
-            {
-                if (animal.Nome == Nome_Animal && animal.Idade == Idades && animal.Raca == Raca && animal.Genero == genero)
-                {
-                    Container.animal_selecionado.Add(animal);
-                }
-            }
-            ViewPost_Perfil post = new ViewPost_Perfil();
-            NavigationService.Navigate(post);
+            Grid grd = (Grid)sender;
+            Label id = (Label)grd.Children[6];
+            Container.animal_selecionado = Int32.Parse(id.Content.ToString());
+            ViewPost_Perfil post_MaisInfo = new ViewPost_Perfil();
+            NavigationService.Navigate(post_MaisInfo);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -117,7 +153,7 @@ namespace Pets_At_First_Sight
 
         private void PackIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Container.utilizador_logado.Clear();
+            Container.current_user = null;
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }

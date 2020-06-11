@@ -1,6 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Pets_At_First_Sight.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,65 +24,111 @@ namespace Pets_At_First_Sight
         public Adocoes()
         {
             InitializeComponent();
-            My_Adocoes.ItemsSource = Container.adocoes;
-            CollectionViewSource.GetDefaultView(Container.adocoes).Refresh(); 
-        }        
+            GetAnimals();
+        }
 
-        private void abandonar(object sender, RoutedEventArgs e)
+        public void GetAnimals()
         {
-            Button i = (Button)sender;
-            PackIcon b = (PackIcon)i.Content;
-            StackPanel s = (StackPanel)i.Parent;
-            Grid gr = (Grid)s.Parent;
-            Image u = (Image)gr.Children[5];
-            String x = u.Source.ToString();
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
+            Container.animais.Clear();
 
-            String Nome_Bicho = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
+            SQLServerConnection.openConnection();
 
-            foreach (ANIMAL zzs in Container.animais)
+            SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ADOTADOS(@username);";
+            SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            SQLServerConnection.command.Parameters.Clear();
+
+            while (SQLServerConnection.reader.Read())
             {
-                if (zzs.Nome == Nome_Bicho && zzs.Idade == Idades)
-                {
-                    Container.adocoes.Remove(zzs);
-                    zzs.Adotado = false;
-                    new Adocoes();
-                    new Inicio();
+                ANIMAL animal = new ANIMAL();
+                animal.Id = (int)SQLServerConnection.reader["id"];
+                animal.Nome = SQLServerConnection.reader["nome"].ToString();
+                animal.Raca = SQLServerConnection.reader["raca"].ToString();
+                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
+                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
+                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
 
-                    break;
+                
+                if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
+                {
+                    animal.Tipo_Doador = "particular";
+                }
+                else
+                {
+                    animal.Tipo_Doador = "abrigo";
+                }
+                
+
+
+                if (SQLServerConnection.reader["especie"].ToString() == "cao")
+                {
+                    animal.Especie = "cão";
+                }
+                else
+                {
+                    animal.Especie = SQLServerConnection.reader["especie"].ToString();
                 }
 
+
+                if (SQLServerConnection.reader["genero"].ToString() == "F")
+                {
+                    animal.Genero = "feminino";
+                }
+                else
+                {
+                    animal.Genero = "masculino";
+                }
+
+                if (SQLServerConnection.reader["vacina"].ToString() == "T")
+                {
+                    animal.Vacinas = "sim";
+                }
+                else
+                {
+                    animal.Vacinas = "não";
+                }
+
+                if (SQLServerConnection.reader["chip"].ToString() == "T")
+                {
+                    animal.Chip = "sim";
+                }
+                else
+                {
+                    animal.Chip = "não";
+                }
+
+                if ((int)SQLServerConnection.reader["idade"] == 1)
+                {
+                    animal.Idade = "1 mês";
+                }
+                else if ((int)SQLServerConnection.reader["idade"] < 12)
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] + " meses";
+                }
+                else if ((int)SQLServerConnection.reader["idade"] < 24)
+                {
+                    animal.Idade = "1 ano";
+                }
+                else
+                {
+                    animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
+                }
+                Container.animais.Add(animal);
             }
+            SQLServerConnection.closeConnection();
+            My_Adocoes.ItemsSource = Container.animais;
+
         }
 
         private void ViewPost(object sender, MouseButtonEventArgs e)
         {
-            Grid gr = (Grid)sender;
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
-
-            String Nome_Animal = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
-
-            foreach (ANIMAL animal in Container.animais)
-            {
-                if (animal.Nome == Nome_Animal && animal.Idade == Idades && animal.Raca == Raca && animal.Genero == genero)
-                {
-                    Container.animal_selecionado.Add(animal);
-                }
-            }
-            ViewPost_Adocoes vpa = new ViewPost_Adocoes();
-            NavigationService.Navigate(vpa);
+            Grid grd = (Grid)sender;
+            Label id = (Label)grd.Children[5];
+            Container.animal_selecionado = Int32.Parse(id.Content.ToString());
+            ViewPost_Adocoes post_MaisInfo = new ViewPost_Adocoes();
+            NavigationService.Navigate(post_MaisInfo);
         }
     }
 }

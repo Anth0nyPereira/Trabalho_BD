@@ -35,7 +35,7 @@
             <materialDesign:PackIcon Margin="300,30,0,0" ToolTip="LogOut" Height="40" Width="40" Kind="ExitToApp" MouseDown="PackIcon_MouseDown"></materialDesign:PackIcon>
             <Border Name="FotoPerfil" CornerRadius="100" VerticalAlignment="Top" Margin="112,57,113,0" Grid.Column="0" Grid.Row="0" Height="150" BorderThickness="1"  BorderBrush="#FF000000">
                 <Border.Background>
-                    <ImageBrush x:Name="Imagem"  ImageSource="Imagens\ImgPerfil.jpg" />
+                    <ImageBrush x:Name="Imagem"/>
                 </Border.Background>
             </Border>
             <Label Name="username" Grid.Column="0"  FontSize="15" HorizontalContentAlignment="Center"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="53" Width="150" Margin="112,209,113,0" Grid.RowSpan="2"/>
