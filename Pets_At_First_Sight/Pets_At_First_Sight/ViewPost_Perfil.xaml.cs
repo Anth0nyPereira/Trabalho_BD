@@ -23,7 +23,7 @@ namespace Pets_At_First_Sight
         public ViewPost_Perfil()
         {
             InitializeComponent();
-            CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
+            //CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
 
         }
 

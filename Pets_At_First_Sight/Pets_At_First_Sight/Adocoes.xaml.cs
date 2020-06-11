@@ -29,15 +29,15 @@ namespace Pets_At_First_Sight
 
         public void GetAnimals()
         {
-            Container.animais.Clear();
-
+            Container.animais_adotados.Clear();
+            SQLServerConnection.reader.Dispose();
             SQLServerConnection.openConnection();
 
             SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ADOTADOS(@username);";
             SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader(); 
             SQLServerConnection.command.Parameters.Clear();
 
             while (SQLServerConnection.reader.Read())
@@ -115,10 +115,11 @@ namespace Pets_At_First_Sight
                 {
                     animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                 }
-                Container.animais.Add(animal);
+                Container.animais_adotados.Add(animal);
             }
+            SQLServerConnection.reader.Dispose();
             SQLServerConnection.closeConnection();
-            My_Adocoes.ItemsSource = Container.animais;
+            My_Adocoes.ItemsSource = Container.animais_adotados;
 
         }
 

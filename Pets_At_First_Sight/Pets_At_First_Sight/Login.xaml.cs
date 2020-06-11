@@ -114,25 +114,6 @@ namespace Pets_At_First_Sight
 
         private static bool ExistsUsername(string username)
         {
-            // check if username exists in db
-            /*
-            SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "SELECT* FROM projeto.ValidarLogin_Email(@email)";
-            //SQLServerConnection.sql = "EXEC @exists = projeto.ValidarLogin_Email @email";
-            SQLServerConnection.command.Parameters.AddWithValue("@email", email);
-            SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
-            SQLServerConnection.command.CommandType = CommandType.Text;
-            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            int exs = (int) SQLServerConnection.command.ExecuteScalar();
-            SQLServerConnection.closeConnection();
-
-            if ((int)exs.Value == 0)
-            {
-                MessageBox.Show("não existe uma conta associada a esse email.");
-                return false;
-            }
-            return true;
-            */
             bool output = false;
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT projeto.ValidarLogin_Username(@username) AS result;";
@@ -160,23 +141,6 @@ namespace Pets_At_First_Sight
 
         private bool ExistsPass(string username, string pass)
         {
-            // check if the inserted pass and its hashing correspond to any existing hash in the table
-            /*
-            SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "EXEC @exists = projeto.ValidarLogin_Password @pass";
-            SQLServerConnection.command.Parameters.AddWithValue("@pass", pass);
-            SqlParameter exists = new SqlParameter("@exists", SqlDbType.Bit);
-            SQLServerConnection.command.CommandType = CommandType.Text;
-            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.closeConnection();
-            /*
-            if (exists == 0)
-            {
-                MessageBox.Show("Não existe nenhuma conta associada a essa password");
-                return false;
-            }
-            */
-            //return true;
             bool output = false;
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT projeto.ValidarLogin_Password(@username2, @pass) AS result;";
@@ -194,41 +158,14 @@ namespace Pets_At_First_Sight
 
             if (output.ToString().Equals("True"))
             {
-                MessageBox.Show("Sucesso!");
                 return true;
             }
             else
             {
                 MessageBox.Show("não existe uma conta associada a essa pass.");
-                MessageBox.Show(SHA512function(pass));
                 return false;
             }
 
-        }
-        // https://stackoverflow.com/questions/11367727/how-can-i-sha512-a-string-in-c
-        public static string SHA512function(string input)
-        {
-            /*
-            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-            using (var hash = System.Security.Cryptography.SHA512.Create())
-            {
-                var hashedInputBytes = hash.ComputeHash(bytes);
-
-                // Convert to text
-                // StringBuilder Capacity is 128, because 512 bits / 8 bits in byte * 2 symbols for byte 
-                var hashstr = BitConverter.ToString(hashedInputBytes).Replace("-", "");
-                return hashstr.ToString();
-                */
-            SHA512 alg = SHA512.Create();
-            byte[] result = alg.ComputeHash(Encoding.UTF8.GetBytes(input));
-            string hash = Encoding.UTF8.GetString(result);
-            StringBuilder hex = new StringBuilder(result.Length);
-            foreach (byte b in result)
-                hex.AppendFormat("{0:x2}", b);
-            string str = hex.ToString();
-            str = str.ToUpper();
-            str = "0x" + str;
-            return str;
         }
     }
 }

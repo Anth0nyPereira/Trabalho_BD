@@ -27,14 +27,14 @@ namespace Pets_At_First_Sight
 
             InitializeComponent();
             GetAnimals();
-            CollectionViewSource.GetDefaultView(Container.animais).Refresh();
+            //CollectionViewSource.GetDefaultView(Container.animais).Refresh();
 
         }
 
         public void GetAnimals()
         {
             Container.animais.Clear();
-
+            //SQLServerConnection.reader.Dispose();
             SQLServerConnection.openConnection();
 
             SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ANIMAIS;";
@@ -48,13 +48,11 @@ namespace Pets_At_First_Sight
                 ANIMAL animal = new ANIMAL();
                 animal.Id = (int)SQLServerConnection.reader["id"];
                 animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                MessageBox.Show(animal.Nome);
                 animal.Raca = SQLServerConnection.reader["raca"].ToString();
                 animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
                 animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
                 animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
-
-
+               
                 if(SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
                     animal.Tipo_Doador = "particular";
@@ -120,8 +118,8 @@ namespace Pets_At_First_Sight
                 }
                 Container.animais.Add(animal);
             }
-            SQLServerConnection.closeConnection();
             Posts.ItemsSource = Container.animais;
+            SQLServerConnection.closeConnection();
 
         }
 
@@ -131,8 +129,19 @@ namespace Pets_At_First_Sight
             string input = pesquisa.Text;
             if (input != "")
             {
+                if (input == "cao" || input == "cão")
+                {
+                    input = "cao";
+                } else if (input == "M" || input == "m" || input == "masculino" || input == "Masculino")
+                {
+                    input = "M";
+                } else if (input == "F" || input == "f" || input == "feminino" || input == "Feminino")
+                {
+                    input = "F";
+                }
+                    SQLServerConnection.reader.Dispose();
                 SQLServerConnection.openConnection();
-                SQLServerConnection.sql = "SELECT FROM projeto.FiltrarAnimal_Pesquisar(@valor);";
+                SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarAnimal_Pesquisar(@valor);";
                 SQLServerConnection.command.Parameters.AddWithValue("@valor", input);
                 SQLServerConnection.command.CommandType = CommandType.Text;
                 SQLServerConnection.command.CommandText = SQLServerConnection.sql;
@@ -216,6 +225,7 @@ namespace Pets_At_First_Sight
                     listaFiltrar.Add(animal);
                 }
                 Posts.ItemsSource = listaFiltrar;
+                SQLServerConnection.reader.Dispose();
                 SQLServerConnection.closeConnection();
 
             } 
@@ -235,7 +245,8 @@ namespace Pets_At_First_Sight
         public void Adopt(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            Grid gr = (Grid)button.Parent;
+            StackPanel sp = (StackPanel)button.Parent;
+            Grid gr = (Grid)sp.Parent;
             Label id = (Label)gr.Children[6];
             string username = Container.current_user.ToString();
 

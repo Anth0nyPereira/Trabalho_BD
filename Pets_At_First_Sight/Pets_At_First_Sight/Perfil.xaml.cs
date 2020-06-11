@@ -33,7 +33,7 @@ namespace Pets_At_First_Sight
                 nome.Content = SQLServerConnection.reader["nome"];
                 email.Content = SQLServerConnection.reader["email"];
                 localidade.Content = SQLServerConnection.reader["morada"];
-                Imagem.ImageSource = new BitmapImage(new Uri(SQLServerConnection.reader["fotografia"].ToString()));
+                //Imagem.ImageSource = new BitmapImage(new Uri(SQLServerConnection.reader["fotografia"].ToString()));
             }
             SQLServerConnection.command.Parameters.Clear();
             SQLServerConnection.closeConnection();
@@ -139,7 +139,7 @@ namespace Pets_At_First_Sight
         private void ViewPost(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Grid grd = (Grid)sender;
-            Label id = (Label)grd.Children[6];
+            Label id = (Label)grd.Children[4];
             Container.animal_selecionado = Int32.Parse(id.Content.ToString());
             ViewPost_Perfil post_MaisInfo = new ViewPost_Perfil();
             NavigationService.Navigate(post_MaisInfo);

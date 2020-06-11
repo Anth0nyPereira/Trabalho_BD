@@ -24,6 +24,7 @@ namespace Pets_At_First_Sight
         public InicioFiltros()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,20 +46,24 @@ namespace Pets_At_First_Sight
         {
             List<ANIMAL> Filtrar = new List<ANIMAL>();
             String especie = null;
-            if (Especie.SelectedItem.ToString() == "Cão")
+            if (Especie.Text.ToString() == "Cão")
             {
                 especie = "cao";
-            } else if (Especie.SelectedItem.ToString() == "Gato")
+            } else if (Especie.Text.ToString() == "Gato")
             {
                 especie = "gato";
             }
 
             int idade = Int32.Parse(Idade.Text.ToString());
             string genero = null;
-            if (Genero.SelectedItem.ToString() == "Masculino")
+            if (Genero.Text == null)
+            {
+              
+            }
+            else if (Genero.Text.ToString() == "Masculino")
             {
                 genero = "M";
-            } else if (Genero.SelectedItem.ToString() == "Feminino")
+            } else if (Genero.Text.ToString() == "Feminino")
             {
                 genero = "F";
             }
@@ -72,21 +77,35 @@ namespace Pets_At_First_Sight
             {
                 chip = "T";
             }
-            string tipo = TipoDoador.SelectedItem.ToString();
+            string tipo = null;
+            if (TipoDoador.Text != null)
+            {
+                tipo = TipoDoador.Text.ToString();
+            }
 
             SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarAnimal(@especie , @genero, @idade, @vacina, @chip, @tipo)";
+            SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarAnimal(@especie , @genero, @idade, @vacina, @chip, @dono_tipo)";
+            /*
             SQLServerConnection.command.Parameters.AddWithValue("@especie", especie == null ? (object)DBNull.Value : especie);
             SQLServerConnection.command.Parameters.AddWithValue("@genero", genero == null ? (object)DBNull.Value : genero);
             SQLServerConnection.command.Parameters.AddWithValue("@idade", idade == 0 ? (object)DBNull.Value : idade);
             SQLServerConnection.command.Parameters.AddWithValue("@vacina", vacina == null ? (object)DBNull.Value : vacina);
             SQLServerConnection.command.Parameters.AddWithValue("@chip", chip == null ? (object)DBNull.Value : chip);
             SQLServerConnection.command.Parameters.AddWithValue("@tipo", tipo == null ? (object)DBNull.Value : tipo);
+            */
+            SQLServerConnection.command.Parameters.AddWithValue("@especie", especie != null ? especie : (object)DBNull.Value);
+            SQLServerConnection.command.Parameters.AddWithValue("@genero", genero != null ? genero : (object)DBNull.Value);
+            SQLServerConnection.command.Parameters.AddWithValue("@idade", idade != 0 ? idade : (object)DBNull.Value);
+            SQLServerConnection.command.Parameters.AddWithValue("@vacina", vacina != null ? vacina : (object)DBNull.Value);
+            SQLServerConnection.command.Parameters.AddWithValue("@chip", chip != null ? chip : (object)DBNull.Value);
+            SQLServerConnection.command.Parameters.AddWithValue("@dono_tipo", tipo != null ? tipo : (object)DBNull.Value);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            MessageBox.Show(SQLServerConnection.sql.ToString());
             while (SQLServerConnection.reader.Read())
             {
+                MessageBox.Show("cheguei aqui crlh");
                 ANIMAL animal = new ANIMAL();
                 animal.Id = (int)SQLServerConnection.reader["id"];
                 animal.Nome = SQLServerConnection.reader["nome"].ToString();
@@ -95,7 +114,7 @@ namespace Pets_At_First_Sight
                 animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
                 animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
 
-
+                MessageBox.Show(animal.Nome);
                 if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
                     animal.Tipo_Doador = "particular";
@@ -159,12 +178,16 @@ namespace Pets_At_First_Sight
                 {
                     animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                 }
-
+                MessageBox.Show(animal.Nome);
                 Filtrar.Add(animal);
             }
             SQLServerConnection.closeConnection();
 
             Inicio inicio = new Inicio();
+            foreach (ANIMAL a in Filtrar)
+            {
+                MessageBox.Show(a.Nome);
+            }
             inicio.Posts.ItemsSource = Filtrar;
             this.NavigationService.Navigate(inicio);
         }

@@ -25,6 +25,7 @@ namespace Pets_At_First_Sight.Classes
         public static SqlConnection connection = new SqlConnection();
         public static SqlCommand command = new SqlCommand("", connection);
         public static SqlDataReader reader;
+        public static SqlDataReader reader2;
         public static DataTable datatable;
         public static SqlDataAdapter adapter;
 

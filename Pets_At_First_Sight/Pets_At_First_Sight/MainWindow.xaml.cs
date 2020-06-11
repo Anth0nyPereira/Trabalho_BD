@@ -22,6 +22,7 @@ namespace Pets_At_First_Sight
     static class Container
     {
         public static List<ANIMAL> animais = new List<ANIMAL>();
+        public static List<ANIMAL> animais_adotados = new List<ANIMAL>();
         public static List<Produto> produtos = new List<Produto>();
         
         public static int animal_selecionado;

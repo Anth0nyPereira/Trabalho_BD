@@ -24,12 +24,13 @@ namespace Pets_At_First_Sight
         public Post_MaisInfo()
         {
             InitializeComponent();
-            CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
+            //CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
 
         }
 
         private void LoadGrid(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("entrei na funcao view post");
             Grid grid = (Grid)sender;
             Label especie = (Label)grid.Children[7];
             Label nome = (Label)grid.Children[9];

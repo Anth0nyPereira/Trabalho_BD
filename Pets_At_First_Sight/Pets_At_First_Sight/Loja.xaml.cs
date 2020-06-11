@@ -23,7 +23,7 @@ namespace Pets_At_First_Sight
         {
             InitializeComponent();
             GetProducts();
-            CollectionViewSource.GetDefaultView(Container.produtos).Refresh();
+            //CollectionViewSource.GetDefaultView(Container.produtos).Refresh();
         }
 
         private void GetProducts()
@@ -62,7 +62,7 @@ namespace Pets_At_First_Sight
             if (input != "")
             {
                 SQLServerConnection.openConnection();
-                SQLServerConnection.sql = "SELECT FROM projeto.FiltrarProduto_Pesquisar(@valor);";
+                SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarProduto_Pesquisar(@valor);";
                 SQLServerConnection.command.Parameters.AddWithValue("@valor", input);
                 SQLServerConnection.command.CommandType = CommandType.Text;
                 SQLServerConnection.command.CommandText = SQLServerConnection.sql;
@@ -73,11 +73,11 @@ namespace Pets_At_First_Sight
                 {
                     Produto prod = new Produto();
                     prod.ID = (int)SQLServerConnection.reader["id"];
-                    prod.NomeProduto = SQLServerConnection.reader["p_name"].ToString();
+                    prod.NomeProduto = SQLServerConnection.reader["nome"].ToString();
                     prod.TipoServico = SQLServerConnection.reader["tipo"].ToString();
                     prod.Stock = (int)SQLServerConnection.reader["quantidade"];
                     prod.Preco = SQLServerConnection.reader["preco"].ToString();
-                    prod.Empresa = SQLServerConnection.reader["nome"].ToString();
+                    prod.Empresa = SQLServerConnection.reader["nome_empresa"].ToString();
 
                     listaFiltrar.Add(prod);
                 }
@@ -101,9 +101,11 @@ namespace Pets_At_First_Sight
         private void Buy(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            Grid gr = (Grid)button.Parent;
+            StackPanel sp = (StackPanel)button.Parent;
+            Grid gr = (Grid)sp.Parent;
             Label id = (Label)gr.Children[5];
-            Container.produto_selecionado = (int)id.Content;
+            MessageBox.Show(id.Content.ToString());
+            Container.produto_selecionado = Int32.Parse(id.Content.ToString());
             CompraProduto cp = new CompraProduto();
             this.NavigationService.Navigate(cp);
         }

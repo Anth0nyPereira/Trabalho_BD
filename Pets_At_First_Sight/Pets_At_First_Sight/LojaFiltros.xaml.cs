@@ -41,13 +41,14 @@ namespace Pets_At_First_Sight
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             List<Produto> Filtrar = new List<Produto>();
-            String tipo = Tipo.SelectedItem.ToString();
+            Filtrar.Clear();
+            String tipo = Tipo.Text;
             int preco = Int32.Parse(PrecoMax.Text.ToString());
             System.DBNull empresa = DBNull.Value;
-
+            MessageBox.Show(tipo);
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarProduto(@tipo , @preco, @empresa)";
-            SQLServerConnection.command.Parameters.AddWithValue("@especie", tipo == null ? (object)DBNull.Value : tipo);
+            SQLServerConnection.command.Parameters.AddWithValue("@tipo", tipo == null ? (object)DBNull.Value : tipo);
             SQLServerConnection.command.Parameters.AddWithValue("@preco", preco == 0 ? (object)DBNull.Value : preco);
             SQLServerConnection.command.Parameters.AddWithValue("@empresa", empresa);
             SQLServerConnection.command.CommandType = CommandType.Text;
@@ -57,11 +58,11 @@ namespace Pets_At_First_Sight
             {
                 Produto prod = new Produto();
                 prod.ID = (int)SQLServerConnection.reader["id"];
-                prod.NomeProduto = SQLServerConnection.reader["p_name"].ToString();
+                prod.NomeProduto = SQLServerConnection.reader["nome"].ToString();
                 prod.TipoServico = SQLServerConnection.reader["tipo"].ToString();
                 prod.Stock = (int)SQLServerConnection.reader["quantidade"];
                 prod.Preco = SQLServerConnection.reader["preco"].ToString();
-                prod.Empresa = SQLServerConnection.reader["nome"].ToString();
+                prod.Empresa = SQLServerConnection.reader["nome_empresa"].ToString();
 
                 Filtrar.Add(prod);
             }

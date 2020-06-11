@@ -22,8 +22,8 @@
                                             <materialDesign:PackIcon Kind="Star"  x:Name="img_bbt_adopt" HorizontalAlignment="Left" Width="40" Height="40" />
                                         </Button>
                                     </StackPanel>
-                                    <Label x:Name="Raca" Content="{Binding Raca}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="167.4,62.8,0,0" VerticalAlignment="Top" Width="82.2" FontFamily="Arial" Foreground="#FFF1E0E0"/>
-                                    <Label x:Name="Nome_Animal" Content="{Binding Nome}"  FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,100.8,0,0" VerticalAlignment="Top" Width="157.2"/>
+                                    <Label x:Name="Nome_Animal" Content="{Binding Nome}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="167.4,62.8,0,0" VerticalAlignment="Top" Width="82.2" FontFamily="Arial" Foreground="#FFF1E0E0"/>
+                                    <Label x:Name="Raca" Content="{Binding Raca}"  FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,100.8,0,0" VerticalAlignment="Top" Width="157.2"/>
                                     <Label x:Name="Idade" Content="{Binding Idade}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,125,0,0" VerticalAlignment="Top" Width="160.8"/>
                                     <Label x:Name="Genero" Content="{Binding Genero}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
                                     <Label x:Name="Id" Content="{Binding Id}" FontSize="18" HorizontalAlignment="Left" Visibility="Collapsed" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
