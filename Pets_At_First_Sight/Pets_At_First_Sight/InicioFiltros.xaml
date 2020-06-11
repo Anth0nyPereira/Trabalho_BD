@@ -61,7 +61,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Width="162" Margin="0,0,0,62" Grid.RowSpan="2">
                 <Slider Name="slide" Maximum="10" Margin="2,22,2,23" Width="113"/>
-                <TextBox Text="{Binding ElementName=slide, Path=Value}" BorderThickness="0" Background="Transparent" Margin="0,47,0,0" Width="42"/>
+                <TextBox Name="Idade" Text="{Binding ElementName=slide, Path=Value}" BorderThickness="0" Background="Transparent" Margin="0,47,0,0" Width="42"/>
             </StackPanel>
 
             <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Width="168" Margin="0,0,0,62" Grid.RowSpan="2">
@@ -78,7 +78,7 @@
                 <Label Margin="2,22,2,0" Width="80" FontSize="20" Height="Auto" Content="Doador:"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Width="162" Margin="0,0,0,53" Grid.RowSpan="2">
-                <ComboBox x:Name="Doador" Margin="2,22,2,23" Width="113">
+                <ComboBox x:Name="TipoDoador" Margin="2,22,2,23" Width="113">
                     <ComboBoxItem Content="Abrigo"/>
                     <ComboBoxItem Content="Particular"/>
                 </ComboBox>

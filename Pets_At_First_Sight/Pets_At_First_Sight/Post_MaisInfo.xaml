@@ -22,52 +22,48 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Background="Transparent" BorderThickness="0" Height="80" materialDesign:RippleAssist.IsDisabled="True" RenderTransformOrigin="4.444,-4.4" Margin="94,12,28,575" Click="Button_Click_1">
-                        <materialDesign:PackIcon Kind="{Binding ChangeAdoptIcon}"  x:Name="img_bbt_adopt" HorizontalAlignment="Left" Width="60" Height="60"/>
+                        <materialDesign:PackIcon Kind="StarOutline"  x:Name="img_bbt_adopt" HorizontalAlignment="Left" Width="60" Height="60"/>
                     </Button>
-                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="130" MaxWidth="300" Height="31" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Adicionar  aos" Margin="81,0,13,565" VerticalAlignment="Bottom" RenderTransformOrigin="-0.86,-1.217"/>
-                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="100" MaxWidth="300" Height="31" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="favoritos" Margin="98,0,26,540" VerticalAlignment="Bottom"/>
-
-                    <Button Background="Transparent" BorderThickness="0" Height="80" materialDesign:RippleAssist.IsDisabled="True" Margin="218,10,72,577" RenderTransformOrigin="4.444,-4.4" Grid.ColumnSpan="2" Click="Button_Click_2">
-                        <materialDesign:PackIcon Kind="{Binding ChangeFavIcon}"  x:Name="img_bbt_fav" Margin="-4" HorizontalAlignment="Left" Width="60" Height="60" />
-                    </Button>
-                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="100" MaxWidth="300" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Estou" Margin="214,70,61,562" Grid.ColumnSpan="2"/>
-                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="100" MaxWidth="300" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="interessado/a" Margin="215,95,60,538" Grid.ColumnSpan="2"/>
-
+                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="130" MaxWidth="300" Height="31" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Estou" Margin="81,0,13,565" VerticalAlignment="Bottom" RenderTransformOrigin="-0.86,-1.217"/>
+                    <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="100" MaxWidth="300" Height="31" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="interessado" Margin="98,0,26,540" VerticalAlignment="Bottom"/>
+                    
+                    <Label Name="PostId" Visibility="Collapsed" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,211,0.2,419.2" Width="Auto" Height="Auto" Grid.Column="1" />
+                    
                     <!--ESPECIE-->
                     <Label Margin="0,0,142.2,414.2" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="79" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="41" Grid.ColumnSpan="2">Espécie:</Label>
-                    <Label Name="PostEspecie" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,211,0.2,419.2" Width="Auto" Height="Auto" Grid.Column="1" Content="{Binding Raca}"/>
+                    <Label Name="PostEspecie" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,211,0.2,419.2" Width="Auto" Height="Auto" Grid.Column="1"/>
 
                     <!--NOME-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,171,150.2,461.2" Height="Auto" Grid.ColumnSpan="2" Width="Auto">Nome:</Label>
-                    <Label Name="PostNome" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,459.2" RenderTransformOrigin="0.533,2.4" HorizontalAlignment="Left" Width="150" Height="37" VerticalAlignment="Bottom" Grid.Column="1" Content="{Binding Nome}"/>
+                    <Label Name="PostNome" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,459.2" RenderTransformOrigin="0.533,2.4" HorizontalAlignment="Left" Width="150" Height="37" VerticalAlignment="Bottom" Grid.Column="1"/>
 
                     <!--RACA-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,254,150.2,383.2" Height="Auto" Grid.ColumnSpan="2" Width="Auto">Raça:</Label>
-                    <Label Name="PostRaca" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,380.2" RenderTransformOrigin="0.533,2.4" HorizontalAlignment="Left" Width="150" Height="37" VerticalAlignment="Bottom" Grid.Column="1" Content="{Binding Nome}"/>
+                    <Label Name="PostRaca" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,380.2" RenderTransformOrigin="0.533,2.4" HorizontalAlignment="Left" Width="150" Height="37" VerticalAlignment="Bottom" Grid.Column="1" />
 
 
                     <!--IDADE-->
                     <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="168,293,145.2,338.2" Height="Auto" Grid.ColumnSpan="2">Idade:</Label>
-                    <Label Name="PostIdade" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,339.2" VerticalAlignment="Bottom" Width="150" Grid.Column="1" HorizontalAlignment="Left" Height="36" Content="{Binding Idade}"/>
+                    <Label Name="PostIdade" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,339.2" VerticalAlignment="Bottom" Width="150" Grid.Column="1" HorizontalAlignment="Left" Height="36" />
 
                     <!--GENERO-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,333,150.2,301.2" Grid.ColumnSpan="2" Width="Auto" Height="Auto">Género:</Label>
-                    <Label Name="PostGenero" HorizontalAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,330,0,293.2" Width="150" Height="Auto" Grid.Column="1" Content="{Binding Genero}"/>
+                    <Label Name="PostGenero" HorizontalAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,330,0,293.2" Width="150" Height="Auto" Grid.Column="1"/>
 
                     <!--IMAGE-->
                     <Image Stretch="Fill"  Source="{Binding Url_Image}"  x:Name="InfosImage" Height="130" Width="130" HorizontalAlignment="Left" Margin="15,144,0,393"/>
 
                     <!--TIPO-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,374,138.2,255.2" Height="Auto" Width="122" Grid.ColumnSpan="2">Tipo doador:</Label>
-                    <Label Name="PostTipoDoador" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,257.2" Width="150" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Content="{Binding Tipo_Doador}"/>
+                    <Label Name="PostTipoDoador" HorizontalContentAlignment="Left" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="1,0,0,257.2" Width="150" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" />
 
                     <!--NOME DOADOR-->
                     <Label Margin="101,0,136.2,213.2" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" VerticalAlignment="Bottom" Height="40" Grid.ColumnSpan="2">Nome doador:</Label>
-                    <Label Name="PostNomeDoador" HorizontalContentAlignment="Left" FontSize="18" Margin="0,0,0,220.2" Width="151" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" HorizontalAlignment="Left" Height="34" Grid.Column="1" Content="{Binding User_Name}"/>
+                    <Label Name="PostNomeDoador" HorizontalContentAlignment="Left" FontSize="18" Margin="0,0,0,220.2" Width="151" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" HorizontalAlignment="Left" Height="34" Grid.Column="1" />
 
                     <!--VACINAS-->
                     <Label FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,0,142.2,174.2" HorizontalAlignment="Right" Width="79" VerticalAlignment="Bottom" Height="40" Grid.ColumnSpan="2">Vacinas:</Label>
-                    <Label Name="PostVacinas" HorizontalContentAlignment="Left" FontSize="18" Margin="0,450,0.2,178.2" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" RenderTransformOrigin="1.55,0.5" Height="Auto" Grid.Column="1" Content="{Binding Vacinas}"/>
+                    <Label Name="PostVacinas" HorizontalContentAlignment="Left" FontSize="18" Margin="0,450,0.2,178.2" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" RenderTransformOrigin="1.55,0.5" Height="Auto" Grid.Column="1" />
 
                     <!--CHIP-->
                     <Label HorizontalAlignment="Right" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,0,144.2,129.2" Content="Chip:" VerticalAlignment="Bottom" Height="37" Width="55" Grid.ColumnSpan="2"/>
@@ -75,7 +71,7 @@
 
                     <!--MENSAGEM-->
                     <Border Height="75" BorderThickness="0"  BorderBrush="#FF000000" Margin="47,0,28.2,27.2" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
-                        <Label Height="75" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="300" Name="PostMensagem" Content="{Binding Mensagem}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        <Label Height="75" FontSize="18" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="300" Name="PostMensagem"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                     </Border>
 
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top">

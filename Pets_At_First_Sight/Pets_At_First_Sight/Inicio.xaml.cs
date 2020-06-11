@@ -48,7 +48,7 @@ namespace Pets_At_First_Sight
                 ANIMAL animal = new ANIMAL();
                 animal.Id = (int)SQLServerConnection.reader["id"];
                 animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                animal.Especie = SQLServerConnection.reader["especie"].ToString();
+                animal.Raca = SQLServerConnection.reader["raca"].ToString();
                 animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
                 animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
                 animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
@@ -64,13 +64,13 @@ namespace Pets_At_First_Sight
                 }
 
 
-                if (SQLServerConnection.reader["raca"].ToString() == "cao")
+                if (SQLServerConnection.reader["especie"].ToString() == "cao")
                 {
-                    animal.Raca = "cão";
+                    animal.Especie = "cão";
                 }
                 else
                 {
-                    animal.Raca = SQLServerConnection.reader["raca"].ToString();
+                    animal.Especie = SQLServerConnection.reader["especie"].ToString();
                 }
 
 
@@ -117,10 +117,6 @@ namespace Pets_At_First_Sight
                 {
                     animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                 }
-
-                animal.Adotado = false;
-                animal.Favorito = false;
-
                 Container.animais.Add(animal);
             }
             SQLServerConnection.closeConnection();
@@ -135,7 +131,6 @@ namespace Pets_At_First_Sight
             if (input != "")
             {
                 SQLServerConnection.openConnection();
-
                 SQLServerConnection.sql = "SELECT FROM projeto.FiltrarAnimal_Pesquisar(@valor);";
                 SQLServerConnection.command.Parameters.AddWithValue("@valor", input);
                 SQLServerConnection.command.CommandType = CommandType.Text;
@@ -217,9 +212,6 @@ namespace Pets_At_First_Sight
                         animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                     }
 
-                    animal.Adotado = false;
-                    animal.Favorito = false;
-
                     listaFiltrar.Add(animal);
                 }
                 Posts.ItemsSource = listaFiltrar;
@@ -242,110 +234,21 @@ namespace Pets_At_First_Sight
 
         public void Adopt(object sender, RoutedEventArgs e)
         {
-            Button i = (Button)sender;
-            PackIcon b = (PackIcon)i.Content;
-            StackPanel s = (StackPanel)i.Parent;
-            Grid gr = (Grid)s.Parent;
-            Image u = (Image)gr.Children[5];
-            String x = u.Source.ToString();
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
+            Button button = (Button)sender;
+            Grid gr = (Grid)button.Parent;
+            Label id = (Label)gr.Children[6];
+            string username = Container.current_user.ToString();
 
-            String Nome_Bicho = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "projeto.AdotarAnimal";
+            SQLServerConnection.command.Parameters.AddWithValue("@id", id);
+            SQLServerConnection.command.Parameters.AddWithValue("@adotante_username", username);
+            SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.command.ExecuteNonQuery();
+            SQLServerConnection.closeConnection();
+            SQLServerConnection.command.Parameters.Clear();
 
-            foreach (ANIMAL zzs in Container.animais)
-            {
-                if (zzs.Nome == Nome_Bicho && zzs.Idade == Idades)
-                {
-                    if (zzs.Adotado == false)
-                    {
-                        zzs.Adotado = true;
-                        Container.adocoes.Add(zzs);
-
-                        b.BeginInit();
-                        b.Kind = PackIconKind.Star;
-                        b.EndInit();
-
-                        new Adocoes();
-                        break;
-                    }
-                    else if (zzs.Adotado)
-                    {
-                        Container.adocoes.Remove(zzs);
-                        zzs.Adotado = false;
-
-                        b.BeginInit();
-                        b.Kind = PackIconKind.StarOutline;
-                        b.EndInit();
-
-                        new Adocoes();
-                        break;
-                    }
-
-
-                }
-
-            }
-        }
-
-        Boolean flagFav = true;
-        public void Fave(object sender, RoutedEventArgs e)
-        {
-
-            Button i = (Button)sender;
-            PackIcon b = (PackIcon)i.Content;
-            StackPanel s = (StackPanel)i.Parent;
-            Grid gr = (Grid)s.Parent;
-            Image u = (Image)gr.Children[5];
-            String x = u.Source.ToString();
-            Label r = (Label)gr.Children[1];
-            Label n = (Label)gr.Children[2];
-            Label y = (Label)gr.Children[3];
-            Label g = (Label)gr.Children[4];
-
-            String Nome_Bicho = n.Content.ToString();
-            String Idades = y.Content.ToString();
-            String Raca = r.Content.ToString();
-            String genero = g.Content.ToString();
-
-            foreach (ANIMAL zzs in Container.animais)
-            {
-                if (zzs.Nome == Nome_Bicho && zzs.Idade == Idades)
-                {
-                    if (zzs.Favorito == false)
-                    {
-                        zzs.Favorito = true;
-                        Container.favoritos.Add(zzs);
-
-                        b.BeginInit();
-                        b.Kind = PackIconKind.Heart;
-                        b.EndInit();
-
-                        new Favoritos();
-                        break;
-                    }
-                    else if (zzs.Favorito == true)
-                    {
-                        Container.favoritos.Remove(zzs);
-                        zzs.Favorito = false;
-
-                        b.BeginInit();
-                        b.Kind = PackIconKind.HeartOutline;
-                        b.EndInit();
-
-                        new Favoritos();
-                        break;
-                    }
-
-
-                }
-
-            }
         }
 
         private void ViewPost(object sender, MouseButtonEventArgs e)
@@ -358,5 +261,5 @@ namespace Pets_At_First_Sight
         }
     }
 
-    }
+ }
 

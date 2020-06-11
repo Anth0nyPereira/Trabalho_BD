@@ -27,7 +27,7 @@
                                 <Grid MouseLeftButtonDown="ViewPost">
                                     <StackPanel HorizontalAlignment="Left" Height="60" Margin="265,05,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.289,0.546">
                                         <Button Background="Transparent" BorderThickness="0" Click="Adopt" Height="60" Margin="0,0,10,0" materialDesign:RippleAssist.IsDisabled="True">
-                                            <materialDesign:PackIcon Kind="{Binding ChangeAdoptIcon}"  x:Name="img_bbt_adopt" HorizontalAlignment="Left" Width="40" Height="40" />
+                                            <materialDesign:PackIcon Kind="StarOutline"  x:Name="img_bbt_adopt" HorizontalAlignment="Left" Width="40" Height="40" />
                                         </Button>
                                     </StackPanel>
                                     <Label x:Name="Nome_Animal" Content="{Binding Nome}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="167,37,0,0" VerticalAlignment="Top" Width="83" FontFamily="Arial" Foreground="#FFF1E0E0"/>
@@ -35,13 +35,8 @@
                                     <Label x:Name="Raca" Content="{Binding Raca}"  FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,100.8,0,0" VerticalAlignment="Top" Width="157.2"/>
                                     <Label x:Name="Idade" Content="{Binding Idade}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,125,0,0" VerticalAlignment="Top" Width="160.8"/>
                                     <Label x:Name="Genero" Content="{Binding Genero}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
-                                    <Label x:Name="Id_Animal" Content="{Binding Id}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,180.8,0,0" Visibility="Hidden" VerticalAlignment="Top" Width="162.2"/>
+                                    <Label x:Name="Id_Animal" Content="{Binding Id}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,180.8,0,0" Visibility="Collapsed" VerticalAlignment="Top" Width="162.2"/>
                                     <Image Grid.Row="0" Source="{Binding Url_Image}" Margin="10,22.8,185.6,10" />
-                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="60" Margin="265,125,0,0" Width="80" RenderTransformOrigin="0.289,0.546">
-                                        <Button Background="Transparent" BorderThickness="0" Click="Fave" Height="60" Margin="0,0,10,0" materialDesign:RippleAssist.IsDisabled="True">
-                                            <materialDesign:PackIcon Kind="{Binding ChangeFavIcon}" x:Name="img_bbt_fav" HorizontalAlignment="Left" Width="40" Height="40" />
-                                        </Button>
-                                    </StackPanel>
                                 </Grid>
                             </materialDesign:Card>
                         </DataTemplate>

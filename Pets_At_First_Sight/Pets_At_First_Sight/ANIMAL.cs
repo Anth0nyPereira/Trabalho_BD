@@ -20,10 +20,6 @@ namespace Pets_At_First_Sight
 		private String _Vacinas;
 		private String _Chip;
 		private String _Mensagem;
-		private bool _Adotado;
-		private bool _Favorito;
-		private String _ChangeAdoptIcon;
-		private String _ChangeHeartIcon;
 
 		public int Id
 		{
@@ -95,33 +91,5 @@ namespace Pets_At_First_Sight
 			get { return _Mensagem; }
 			set { _Mensagem = value; }
 		}
-
-		public bool Adotado
-		{
-			get { return _Adotado; }
-			set { _Adotado = value; }
-		}
-
-		public bool Favorito
-		{
-			get { return _Favorito; }
-			set { _Favorito = value; }
-		}
-
-		public String ChangeAdoptIcon
-		{
-			get{ if (_Adotado) { return "Star"; }
-				else { return "StarOutline"; } }
-		}
-
-		public String ChangeFavIcon
-		{
-			get
-			{
-				if (_Favorito) { return "Heart"; }
-				else { return "HeartOutline"; }
-			}
-		}
-
 	}
 }

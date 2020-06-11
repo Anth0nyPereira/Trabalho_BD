@@ -82,102 +82,19 @@ namespace Pets_At_First_Sight
             Button starbutton = (Button)sender;
             PackIcon icon = (PackIcon)starbutton.Content;
             Grid gr = (Grid)starbutton.Parent;
-            Label name_label = (Label)gr.Children[9];
-            Label age_label = (Label)gr.Children[11];
+            Label id = (Label)gr.Children[3];
 
-            String Name = name_label.Content.ToString();
-            String Age = age_label.Content.ToString();
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "projeto.AdotarAnimal";
+            SQLServerConnection.command.Parameters.AddWithValue("@id", id);
+            SQLServerConnection.command.Parameters.AddWithValue("@adotante_username", Container.current_user);
+            SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.command.ExecuteNonQuery();
+            SQLServerConnection.closeConnection();
+            SQLServerConnection.command.Parameters.Clear();
+            icon.Kind = PackIconKind.Star;
 
-            foreach (ANIMAL zzs in Container.animais)
-            {
-                if (zzs.Nome == Name && zzs.Idade == Age)
-                {
-                    if (zzs.Adotado)
-                    {
-                        Container.adocoes.Remove(zzs);
-                        zzs.Adotado = false;
-
-                        icon.BeginInit();
-                        icon.Kind = PackIconKind.StarOutline;
-                        icon.EndInit();
-
-                        new Post_MaisInfo();
-                        new Adocoes();
-                        new Inicio();
-
-                        break;
-                    }
-                    else
-                    {
-                        zzs.Adotado = true;
-                        Container.adocoes.Add(zzs);
-
-                        icon.BeginInit();
-                        icon.Kind = PackIconKind.Star;
-                        icon.EndInit();
-
-                        new Post_MaisInfo();
-                        new Adocoes();
-                        new Inicio();
-
-                        break;
-
-                    }
-
-                }
-
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Button heartbutton = (Button)sender;
-            PackIcon icon = (PackIcon)heartbutton.Content;
-            Grid gr = (Grid)heartbutton.Parent;
-            Label name_label = (Label)gr.Children[9];
-            Label age_label = (Label)gr.Children[11];
-
-            String Name = name_label.Content.ToString();
-            String Age = age_label.Content.ToString();
-
-            foreach (ANIMAL zzs in Container.animais)
-            {
-                if (zzs.Nome == Name && zzs.Idade == Age)
-                {
-                    if (zzs.Favorito)
-                    {
-                        Container.favoritos.Remove(zzs);
-                        zzs.Favorito = false;
-
-                        icon.BeginInit();
-                        icon.Kind = PackIconKind.HeartOutline;
-                        icon.EndInit();
-
-                        new Post_MaisInfo();
-                        new Favoritos();
-                        new Inicio();
-
-                        break;
-                    }
-                    else
-                    {
-
-                        zzs.Favorito = true;
-                        Container.favoritos.Add(zzs);
-
-                        icon.BeginInit();
-                        icon.Kind = PackIconKind.Heart;
-                        icon.EndInit();
-
-                        new Post_MaisInfo();
-                        new Favoritos();
-                        new Inicio();
-
-                        break;
-                    }
-
-                }
-            }
         }
     }
 }
