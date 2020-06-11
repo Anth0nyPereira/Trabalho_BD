@@ -42,40 +42,41 @@ namespace Pets_At_First_Sight
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             List<ANIMAL> Filtrar = new List<ANIMAL>();
-
-            foreach (ANIMAL m in Container.animais)
-            {
-                Filtrar.Add(m);
-            }
+            string especie = null;
+            string idade = null;
+            string genero = null;
+            string vacina = null;
+            string chip = null;
+            string tipo = null;
 
             foreach(ANIMAL animal in Container.animais)
             {
-                String[] idadeAnimal = animal.Idade.Split(' ');
-
-                if (Filtrar.Contains(animal) && Especie.SelectedItem != null && !animal.Raca.Equals(Especie.Text.ToString()))
+                
+                if (Especie.SelectedItem != null)
                 {
+                    
                     Filtrar.Remove(animal);
                 }
 
-                if (slide.Value != 0 && (idadeAnimal[1] == "anos" || idadeAnimal[1] == "ano") && Int32.Parse(idadeAnimal[0]) > slide.Value && Filtrar.Contains(animal))
-                {
-                    Filtrar.Remove(animal);
-                }
-
-                if (Filtrar.Contains(animal) && Genero.SelectedItem != null && !animal.Genero.Equals(Genero.Text.ToString()))
+                if (slide.Value != 0)
                 {
                     Filtrar.Remove(animal);
                 }
 
-                if(Filtrar.Contains(animal) && Doador.SelectedItem != null && !animal.Tipo_Doador.Equals(Doador.Text.ToString()))
+                if (Genero.SelectedItem != null)
                 {
                     Filtrar.Remove(animal);
                 }
-                if((bool)Vacinados.IsChecked && animal.Vacinas.Equals("Não") && Filtrar.Contains(animal))
+
+                if(Doador.SelectedItem != null)
                 {
                     Filtrar.Remove(animal);
                 }
-                if ((bool)Chip.IsChecked && animal.Chip.Equals("Não") && Filtrar.Contains(animal))
+                if((bool)Vacinados.IsChecked)
+                {
+                    Filtrar.Remove(animal);
+                }
+                if ((bool)Chip.IsChecked)
                 {
                     Filtrar.Remove(animal);
                 }

@@ -27,7 +27,6 @@ namespace Pets_At_First_Sight
 
             InitializeComponent();
             GetAnimals();
-            Posts.ItemsSource = Container.animais;
             CollectionViewSource.GetDefaultView(Container.animais).Refresh();
 
         }
@@ -125,33 +124,114 @@ namespace Pets_At_First_Sight
                 Container.animais.Add(animal);
             }
             SQLServerConnection.closeConnection();
+            Posts.ItemsSource = Container.animais;
 
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            List<ANIMAL> Filtrar = new List<ANIMAL>();
-
-            if (e.Key == Key.Return && pesquisa.Text != "")
+            List<ANIMAL> listaFiltrar = new List<ANIMAL>();
+            string input = pesquisa.Text;
+            if (input != "")
             {
+                SQLServerConnection.openConnection();
 
-                foreach (ANIMAL m in Container.animais)
+                SQLServerConnection.sql = "SELECT FROM projeto.FiltrarAnimal_Pesquisar(@valor);";
+                SQLServerConnection.command.Parameters.AddWithValue("@valor", input);
+                SQLServerConnection.command.CommandType = CommandType.Text;
+                SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+                SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+                SQLServerConnection.command.Parameters.Clear();
+
+                while (SQLServerConnection.reader.Read())
                 {
-                    if (m.User_Name.Equals(pesquisa.Text) | m.Idade.Equals(pesquisa.Text) | m.Raca.Equals(pesquisa.Text) | m.Genero.Equals(pesquisa.Text))
+                    ANIMAL animal = new ANIMAL();
+                    animal.Id = (int)SQLServerConnection.reader["id"];
+                    animal.Nome = SQLServerConnection.reader["nome"].ToString();
+                    animal.Especie = SQLServerConnection.reader["especie"].ToString();
+                    animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
+                    animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
+                    animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+
+                    if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                     {
-                        Filtrar.Add(m);
+                        animal.Tipo_Doador = "particular";
                     }
+                    else
+                    {
+                        animal.Tipo_Doador = "abrigo";
+                    }
+
+
+                    if (SQLServerConnection.reader["raca"].ToString() == "cao")
+                    {
+                        animal.Raca = "cão";
+                    }
+                    else
+                    {
+                        animal.Raca = SQLServerConnection.reader["raca"].ToString();
+                    }
+
+
+                    if (SQLServerConnection.reader["genero"].ToString() == "F")
+                    {
+                        animal.Genero = "feminino";
+                    }
+                    else
+                    {
+                        animal.Genero = "masculino";
+                    }
+
+                    if (SQLServerConnection.reader["vacina"].ToString() == "T")
+                    {
+                        animal.Vacinas = "sim";
+                    }
+                    else
+                    {
+                        animal.Vacinas = "não";
+                    }
+
+                    if (SQLServerConnection.reader["chip"].ToString() == "T")
+                    {
+                        animal.Chip = "sim";
+                    }
+                    else
+                    {
+                        animal.Chip = "não";
+                    }
+
+                    if ((int)SQLServerConnection.reader["idade"] == 1)
+                    {
+                        animal.Idade = "1 mês";
+                    }
+                    else if ((int)SQLServerConnection.reader["idade"] < 12)
+                    {
+                        animal.Idade = (int)SQLServerConnection.reader["idade"] + " meses";
+                    }
+                    else if ((int)SQLServerConnection.reader["idade"] < 24)
+                    {
+                        animal.Idade = "1 ano";
+                    }
+                    else
+                    {
+                        animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
+                    }
+
+                    animal.Adotado = false;
+                    animal.Favorito = false;
+
+                    listaFiltrar.Add(animal);
                 }
-                Posts.ItemsSource = Filtrar;
+                Posts.ItemsSource = listaFiltrar;
+                SQLServerConnection.closeConnection();
 
-            }
-            else if (e.Key == Key.Return && pesquisa.Text == "")
+            } 
+            else
             {
-                Posts.ItemsSource = null;
-                Posts.ItemsSource = Container.animais;
-
+                GetAnimals();
             }
-        }
+         }
+          
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
