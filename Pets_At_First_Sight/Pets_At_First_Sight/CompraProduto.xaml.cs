@@ -63,23 +63,44 @@ namespace Pets_At_First_Sight
             {
                 meio_pagamento = "Transferência bancária";
             }
-
             quantidade = Int32.Parse(quantidade_.Text);
 
+            bool output = false;
             SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "projeto.InserirCompra";
-            SQLServerConnection.command.Parameters.AddWithValue("@id_produto", Container.produto_selecionado);
-            SQLServerConnection.command.Parameters.AddWithValue("@meio_pagamento", meio_pagamento);
-            SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
-            SQLServerConnection.command.Parameters.AddWithValue("@quantidade", quantidade);
-            SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+            SQLServerConnection.sql = "SELECT projeto.ValidarQuantidade(@id, @qtty) AS result;";
+            SQLServerConnection.command.Parameters.AddWithValue("@id", Container.produto_selecionado);
+            SQLServerConnection.command.Parameters.AddWithValue("@qtty", quantidade);
+            SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.command.ExecuteNonQuery();
-            SQLServerConnection.closeConnection();
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             SQLServerConnection.command.Parameters.Clear();
-            MessageBox.Show("Compra efetuada com sucesso.\nObrigado.");
-            Loja loja = new Loja();
-            this.NavigationService.Navigate(loja);
+            while (SQLServerConnection.reader.Read())
+            {
+                output = (bool)SQLServerConnection.reader["result"];
+            }
+            SQLServerConnection.closeConnection();
+
+            if(output == false)
+            {
+                MessageBox.Show("Lamentamos! A quantidade escolhida não existe em stock.");
+            }
+            else
+            {
+                SQLServerConnection.openConnection();
+                SQLServerConnection.sql = "projeto.InserirCompra";
+                SQLServerConnection.command.Parameters.AddWithValue("@id_produto", Container.produto_selecionado);
+                SQLServerConnection.command.Parameters.AddWithValue("@meio_pagamento", meio_pagamento);
+                SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
+                SQLServerConnection.command.Parameters.AddWithValue("@quantidade", quantidade);
+                SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
+                SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+                SQLServerConnection.command.ExecuteNonQuery();
+                SQLServerConnection.closeConnection();
+                SQLServerConnection.command.Parameters.Clear();
+                MessageBox.Show("Compra efetuada com sucesso.\nObrigado.");
+                Loja loja = new Loja();
+                this.NavigationService.Navigate(loja);
+            }
         }
     }
 
