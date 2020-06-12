@@ -45,6 +45,8 @@ namespace Pets_At_First_Sight
         private void Buy(object sender, RoutedEventArgs e)
         {
             String meio_pagamento = null;
+            int quantidade = 0;
+
             if ((bool)CM.IsChecked)
             {
                 meio_pagamento = "Multibanco";
@@ -61,11 +63,15 @@ namespace Pets_At_First_Sight
             {
                 meio_pagamento = "Transferência bancária";
             }
+
+            quantidade = Int32.Parse(quantidade_.Text);
+
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "projeto.InserirCompra";
             SQLServerConnection.command.Parameters.AddWithValue("@id_produto", Container.produto_selecionado);
             SQLServerConnection.command.Parameters.AddWithValue("@meio_pagamento", meio_pagamento);
             SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
+            SQLServerConnection.command.Parameters.AddWithValue("@quantidade", quantidade);
             SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
             SQLServerConnection.command.ExecuteNonQuery();

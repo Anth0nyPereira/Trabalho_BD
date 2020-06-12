@@ -27,16 +27,12 @@ namespace Pets_At_First_Sight
 
             InitializeComponent();
             GetAnimals();
-            //CollectionViewSource.GetDefaultView(Container.animais).Refresh();
-
         }
 
         public void GetAnimals()
         {
             Container.animais.Clear();
-            //SQLServerConnection.reader.Dispose();
             SQLServerConnection.openConnection();
-
             SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ANIMAIS;";
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
@@ -141,7 +137,7 @@ namespace Pets_At_First_Sight
                 {
                     input = "F";
                 }
-                    SQLServerConnection.reader.Dispose();
+                SQLServerConnection.reader.Dispose();
                 SQLServerConnection.openConnection();
                 SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarAnimal_Pesquisar(@valor);";
                 SQLServerConnection.command.Parameters.AddWithValue("@valor", input);
@@ -260,7 +256,6 @@ namespace Pets_At_First_Sight
             SQLServerConnection.command.Parameters.AddWithValue("@adotante_username", username);
             SQLServerConnection.command.CommandType = CommandType.StoredProcedure;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.command.ExecuteNonQuery();
             SQLServerConnection.closeConnection();
             SQLServerConnection.command.Parameters.Clear();
             new Inicio();

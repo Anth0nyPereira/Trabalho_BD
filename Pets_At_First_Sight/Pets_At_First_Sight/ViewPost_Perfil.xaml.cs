@@ -76,8 +76,6 @@ namespace Pets_At_First_Sight
             this.NavigationService.Navigate(p);
         }
 
-        Boolean flagAdo = true;
-
         private void Adopt(object sender, RoutedEventArgs e)
         {
             Button i = (Button)sender;

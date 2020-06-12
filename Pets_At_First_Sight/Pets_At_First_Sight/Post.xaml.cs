@@ -42,16 +42,72 @@ namespace Pets_At_First_Sight
         private void ButtonSubmeter_Click(object sender, RoutedEventArgs e)
         {
             BitmapImage z = new BitmapImage(new Uri("Imagens\\NoImage.jpg", UriKind.Relative));
+            
             String Especie = EspecieAnimal.Text.ToString();
-            String Raca = RacaAnimal.Text.ToString();
+
+            if(Especie == "Cão")
+            {
+                Especie = "cao";
+            }
+            else
+            {
+                Especie = "gato";
+            }
+
+            String Raca = RacaAnimal.Text.ToString().ToLower();
+            if(Raca == "")
+            {
+                Raca = "SRD";
+            }
+
             String Nome = NomeAnimal.Text.ToString();
-            String Idade = IdadeAnimal.Text.ToString();
+
+            String[] idd = IdadeAnimal.Text.ToString().Split(' ');
+            int Idade = 0;
+            if(idd[1] == "mês" || idd[1] == "meses")
+            {
+                Idade = Int32.Parse(idd[0]);
+            }
+            else
+            {
+                Idade = Int32.Parse(idd[0]) * 12;
+            }
+
             String Genero = GeneroAnimal.Text.ToString();
+            if(Genero == "Masculino")
+            {
+                Genero = "M";
+            }
+            else
+            {
+                Genero = "F";
+            }
+
             String _NomeDoador = Container.current_user;
+
             String _Vacinas = Vacinas.Text.ToString();
+            if (_Vacinas == "Sim")
+            {
+                _Vacinas = "T";
+            }
+            else
+            {
+                _Vacinas = "F";
+            }
+
             String _Chip = Chip.Text.ToString();
+            if (_Chip == "Sim")
+            {
+                _Chip = "T";
+            }
+            else
+            {
+                _Chip = "F";
+            }
+
             String Testo = PostTexto.Text.ToString();
             String Url_Image_ = InputImage.Source.ToString();
+
             if (Especie.Length == 0 | Genero.Length == 0)
             {
                 MessageBox.Show("Prencher todos os campos!!");

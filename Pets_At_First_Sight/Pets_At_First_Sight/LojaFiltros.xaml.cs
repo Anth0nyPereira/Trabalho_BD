@@ -45,7 +45,6 @@ namespace Pets_At_First_Sight
             String tipo = Tipo.Text;
             int preco = Int32.Parse(PrecoMax.Text.ToString());
             System.DBNull empresa = DBNull.Value;
-            MessageBox.Show(tipo);
             SQLServerConnection.openConnection();
             SQLServerConnection.sql = "SELECT* FROM projeto.FiltrarProduto(@tipo , @preco, @empresa)";
             SQLServerConnection.command.Parameters.AddWithValue("@tipo", tipo == null ? (object)DBNull.Value : tipo);

@@ -29,7 +29,7 @@
         </StackPanel>
 
         <ComboBox
-                  x:Name="quantidade"
+                  x:Name="quantidade_"
                   MinWidth="72"
                   IsEditable="True"
                   ItemsSource="{Binding LongListToTestComboVirtualization}" Margin="209,360,0,279" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">

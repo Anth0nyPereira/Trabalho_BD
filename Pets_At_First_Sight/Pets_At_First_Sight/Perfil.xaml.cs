@@ -161,7 +161,8 @@ namespace Pets_At_First_Sight
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            StackPanel Sp = (StackPanel)sender;
+            Button butt = (Button)sender;
+            StackPanel Sp = (StackPanel)butt.Parent;
             Grid gr = (Grid)Sp.Parent;
             Label id_label = (Label)gr.Children[4];
             int id = Int32.Parse(id_label.Content.ToString());
@@ -173,6 +174,8 @@ namespace Pets_At_First_Sight
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             SQLServerConnection.command.Parameters.Clear();
             SQLServerConnection.closeConnection();
+            Perfil p = new Perfil();
+            this.NavigationService.Navigate(p);
         }
     }
 }

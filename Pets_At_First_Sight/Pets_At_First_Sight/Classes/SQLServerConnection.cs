@@ -25,9 +25,7 @@ namespace Pets_At_First_Sight.Classes
         public static SqlConnection connection = new SqlConnection();
         public static SqlCommand command = new SqlCommand("", connection);
         public static SqlDataReader reader;
-        public static SqlDataReader reader2;
-        public static DataTable datatable;
-        public static SqlDataAdapter adapter;
+
 
         public static void openConnection()
         {
@@ -58,6 +56,10 @@ namespace Pets_At_First_Sight.Classes
             {
                 MessageBox.Show("Falhou a conexão", "Tente Novamente!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        internal class reader_list_animais
+        {
         }
     }
 

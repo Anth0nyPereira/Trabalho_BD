@@ -38,13 +38,42 @@ namespace Pets_At_First_Sight
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             while (SQLServerConnection.reader.Read())
             {
-                DONATIVO don = new DONATIVO
+                DONATIVO don = new DONATIVO();
+                if(SQLServerConnection.reader["meio"] == DBNull.Value)
                 {
-                    MeioPagamento = SQLServerConnection.reader["meio"].ToString(),
-                    Quantia = (decimal)SQLServerConnection.reader["quantia"],
-                    TipoAlimento = SQLServerConnection.reader["tipo"].ToString(),
-                    QuantidadeAlimento = SQLServerConnection.reader["QUANTIDADE"].ToString(),
-                };
+                    don.MeioPagamento = null;
+                }
+                else
+                {
+                    don.MeioPagamento = SQLServerConnection.reader["meio"].ToString();
+                }
+                
+                if(SQLServerConnection.reader["quantia"] == DBNull.Value)
+                {
+                    don.Quantia = 0;
+                }
+                else
+                {
+                    don.Quantia = (decimal)SQLServerConnection.reader["quantia"];
+                }
+                
+                if(SQLServerConnection.reader["tipo"] == DBNull.Value)
+                {
+                    don.TipoAlimento = null;
+                }
+                else
+                {
+                    don.TipoAlimento = SQLServerConnection.reader["tipo"].ToString();
+                }
+                
+                if(SQLServerConnection.reader["QUANTIDADE"] == DBNull.Value)
+                {
+                    don.QuantidadeAlimento = null;
+                }
+                else
+                {
+                    don.QuantidadeAlimento = SQLServerConnection.reader["QUANTIDADE"].ToString();
+                }
 
                 my.Add(don);
             }
