@@ -13,12 +13,51 @@
       Background="#DCE3E7">
 
     <Grid>
-        <Label x:Name="Titulo_Dons" Height="36" Content="Meus Donativos" Margin="115,24,114,607" FontFamily="Arial" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+        <Label x:Name="Titulo_Dons" Height="36" Content="Adicionar Donativo Monetário" Margin="75,24,35,607" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" Click="Back_Click" HorizontalAlignment="Left" VerticalAlignment="Top">
             <materialDesign:PackIcon
                 Kind="ArrowBack"
                 Height="24"
                 Width="24" />
         </Button>
+
+        <StackPanel Margin="42,164,45,383">
+            <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="44" Width="288">Método de Pagamento:</Label>
+            <StackPanel Orientation="Vertical">
+                <RadioButton x:Name="CM" IsChecked="True">Cartão Multibanco</RadioButton>
+                <RadioButton x:Name="TB">Transferência Bancária</RadioButton>
+                <RadioButton x:Name="MBW">MB Way</RadioButton>
+                <RadioButton x:Name="PP">Paypal</RadioButton>
+            </StackPanel>
+        </StackPanel>
+
+        <ComboBox
+                  x:Name="quantidade_"
+                  MinWidth="72"
+                  IsEditable="True"
+                  ItemsSource="{Binding LongListToTestComboVirtualization}" Margin="209,360,0,279" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
+            <ComboBox.Text>
+                <Binding    
+                      Path="SelectedTextTwo"
+                      Mode="TwoWay"
+                      UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </ComboBox.Text>
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,360,192,267" Content="Quantidade:"/>
+        <Button
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Height="50"
+            materialDesign:ButtonAssist.CornerRadius="25"
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Margin="103,496,105,121" Click="addMon">
+            <TextBlock
+                Text="Registar" />
+        </Button>
+
     </Grid>
 </Page>

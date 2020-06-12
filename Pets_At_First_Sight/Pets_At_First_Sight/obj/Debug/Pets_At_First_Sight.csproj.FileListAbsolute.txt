@@ -23,8 +23,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Perfil.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post_MaisInfo.g.cs
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Adocoes.g.cs
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Perfil.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Windows.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\App.g.cs
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight_MarkupCompile.cache
@@ -46,8 +44,6 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Perfil.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Post_MaisInfo.baml
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Adocoes.baml
-C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\ViewPost_Perfil.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Windows.baml
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.g.resources
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.Properties.Resources.resources
@@ -58,3 +54,5 @@ C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\De
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.pdb
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\bin\Debug\Pets_At_First_Sight.pdb
 C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\Pets_At_First_Sight.csprojAssemblyReference.cache
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\NewAlimentar.g.cs
+C:\Users\Acer\Desktop\Trabalho_BD\Pets_At_First_Sight\Pets_At_First_Sight\obj\Debug\NewAlimentar.baml

@@ -35,9 +35,10 @@
             <materialDesign:PackIcon Margin="300,30,0,0" ToolTip="LogOut" Height="40" Width="40" Kind="ExitToApp" MouseDown="PackIcon_MouseDown"></materialDesign:PackIcon>
             <Border Name="FotoPerfil" CornerRadius="100" VerticalAlignment="Top" Margin="112,57,113,0" Grid.Column="0" Grid.Row="0" Height="150" BorderThickness="1"  BorderBrush="#FF000000">
                 <Border.Background>
-                    <ImageBrush x:Name="Imagem"/>
+                    <ImageBrush x:Name="Imagem" ImageSource="{Binding Source={x:Reference source_string}, Path=Text}"/>
                 </Border.Background>
             </Border>
+            <Label x:Name="source_string" Grid.Column="0" Visibility="Collapsed" FontSize="15" HorizontalContentAlignment="Center"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="53" Width="150" Margin="112,209,113,0" Grid.RowSpan="2"/>
             <Label Name="username" Grid.Column="0"  FontSize="15" HorizontalContentAlignment="Center"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="53" Width="150" Margin="112,209,113,0" Grid.RowSpan="2"/>
         </Grid>
         <!-- Second grid, which includes "mais informações" and infos about the user -->
@@ -66,7 +67,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <materialDesign:Card Background="#b2bfdb" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" UniformCornerRadius="6" Padding="8" Margin="10,0,20,10">
-                                        <Grid ScrollViewer.CanContentScroll="True"  MouseLeftButtonDown="ViewPost">
+                                        <Grid ScrollViewer.CanContentScroll="True">
                                             <Image Grid.Row="0" Source="{Binding Url_Image}" Margin="10,22.8,185.6,10" Height="Auto"/>
                                             <Label x:Name="Raca" Content="{Binding Raca}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="167.4,62.8,0,0" VerticalAlignment="Top" Width="82.2" FontFamily="Arial" Foreground="#FFF1E0E0"/>
                                             <Label x:Name="Nome_Animal" Content="{Binding Nome}"  FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,100.8,0,0" VerticalAlignment="Top" Width="157.2"/>

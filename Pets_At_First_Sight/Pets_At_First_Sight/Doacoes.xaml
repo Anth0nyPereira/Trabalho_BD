@@ -12,8 +12,8 @@
       Background="#DCE3E7"
       Title="Doacoes">
 
-    <Grid>
-        <Label x:Name="Titulo_Doacoes" Content="Doações" Margin="129,40,129,583" FontFamily="Arial" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" Height="44"/>
+    <Grid Height="700">
+        <Label x:Name="Titulo_Dons" Height="36" Content="Meus Donativos" Margin="129,80,95,584" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
 
         <ScrollViewer Margin="0,121,0.2,88.2" >
             <Grid  Width="375">
@@ -22,24 +22,25 @@
                         <DataTemplate>
                             <materialDesign:Card Background="#b2bfdb" Height="200" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" UniformCornerRadius="6" Padding="8" Margin="10,0,20,10">
                                 <Grid>
-                                    <Label x:Name="MeioPagamento" Content="{Binding MeioPagamento}" FontSize="20" Height="28" Margin="80,51,67,0" VerticalAlignment="Top" FontFamily="Arial" Foreground="#FFF1E0E0"/>
-                                    <Label x:Name="Abrigo" Content="{Binding Abrigo}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="102,7,0,0" VerticalAlignment="Top" Width="160" FontFamily="Arial" Foreground="#FFF1E0E0"/>
-                                    <Label x:Name="Quantia" Content="{Binding Quantia}"  FontSize="18" Height="30" Margin="104,121,68,0" VerticalAlignment="Top" Width="157.2"/>
-                                    <Label x:Name="TipoAlimento" Content="{Binding TipoAlimento}" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="45,51,0,0" VerticalAlignment="Top" Width="251"/>
-                                    <Label x:Name="QuantidadeAlimento" Content="{Binding QuantidadeAlimento}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="56,123,0,0" VerticalAlignment="Top" Width="240"/>
+                                    <Label x:Name="MeioPagamento" Content="{Binding MeioPagamento}" FontSize="20" Height="43" Margin="74,36,73,0" VerticalAlignment="Top" Foreground="#FFF1E0E0"/>
+                                    <Label x:Name="Abrigo" Content="{Binding Abrigo}" FontSize="18" HorizontalContentAlignment="Left" Height="28" Margin="74,93,81,0" VerticalAlignment="Top"/>
+                                    <Label x:Name="Quantia" Content="{Binding Quantia}" Initialized="HideVis" FontSize="18" Height="30" Margin="76,121,96,0" VerticalAlignment="Top" Width="157.2"/>
+                                    <Label x:Name="TipoAlimento" Content="{Binding TipoAlimento}" FontSize="20" Height="45" Foreground="#FFF1E0E0" Margin="39,36,10,0" VerticalAlignment="Top"/>
+                                    <Label x:Name="QuantidadeAlimento" Content="{Binding QuantidadeAlimento}" FontSize="18" Height="28" Margin="44,123,45,0" VerticalAlignment="Top"/>
                                 </Grid>
                             </materialDesign:Card>
 
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" ToolTip="MaterialDesignFloatingActionDarkButton" Margin="0,354,30,48" HorizontalAlignment="Right" Click="Add_doacao">
-                    <materialDesign:PackIcon
+
+            </Grid>
+        </ScrollViewer>
+        <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" ToolTip="MaterialDesignFloatingActionDarkButton" Margin="0,354,30,48" HorizontalAlignment="Right" Click="Add_doacao">
+            <materialDesign:PackIcon
                     Kind="Plus"
                     Height="24"
                     Width="24"/>
-                </Button>
-            </Grid>
-        </ScrollViewer>
+        </Button>
     </Grid>
 </Page>

@@ -24,50 +24,38 @@ namespace Pets_At_First_Sight
         public Post_MaisInfo()
         {
             InitializeComponent();
-            //CollectionViewSource.GetDefaultView(Container.animal_selecionado).Refresh();
-
+            LoadGrid();
+            CollectionViewSource.GetDefaultView(Container.ver_mais).Refresh();
         }
 
-        private void LoadGrid(object sender, RoutedEventArgs e)
+        private void LoadGrid()
         {
-            MessageBox.Show("entrei na funcao view post");
-            Grid grid = (Grid)sender;
-            Label especie = (Label)grid.Children[7];
-            Label nome = (Label)grid.Children[9];
-            Label raca = (Label)grid.Children[11];
-            Label idade = (Label)grid.Children[13];
-            Label genero = (Label)grid.Children[15];
-            Label imagem = (Label)grid.Children[16];
-            Label tipo = (Label)grid.Children[18];
-            Label nomeDoador = (Label)grid.Children[20];
-            Label vacinas = (Label)grid.Children[22];
-            Label chip = (Label)grid.Children[24];
-            Border border = (Border)grid.Children[25];
-            Label mensagem = (Label)border.Child;
-
+            Container.ver_mais.Clear();
             int id = Container.animal_selecionado;
             SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "SELECT FROM projeto.VerPost(@id)";
+            SQLServerConnection.sql = "SELECT * FROM projeto.VerPost(@id)";
             SQLServerConnection.command.Parameters.AddWithValue("@id", id);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             while (SQLServerConnection.reader.Read())
             {
-                nome.Content = SQLServerConnection.reader["nome"];
-                especie.Content = SQLServerConnection.reader["especie"];
-                raca.Content = SQLServerConnection.reader["raca"];
-                idade.Content = SQLServerConnection.reader["idade"];
-                genero.Content = SQLServerConnection.reader["genero"];
-                imagem.Content = SQLServerConnection.reader["fotografia"];
-                tipo.Content = SQLServerConnection.reader["tipo"];
-                nomeDoador.Content = SQLServerConnection.reader["dono_username"];
-                vacinas.Content = SQLServerConnection.reader["vacina"];
-                chip.Content = SQLServerConnection.reader["chip"];
-                mensagem.Content = SQLServerConnection.reader["descricao"];
-
+                ANIMAL a = new ANIMAL();
+                a.Nome = SQLServerConnection.reader["nome"].ToString();
+                a.Especie = SQLServerConnection.reader["especie"].ToString();
+                a.Raca = SQLServerConnection.reader["raca"].ToString();
+                a.Idade = SQLServerConnection.reader["idade"].ToString();
+                a.Genero = SQLServerConnection.reader["genero"].ToString();
+                a.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
+                a.Tipo_Doador = SQLServerConnection.reader["tipo"].ToString();
+                a.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+                a.Vacinas = SQLServerConnection.reader["vacina"].ToString();
+                a.Chip = SQLServerConnection.reader["chip"].ToString();
+                a.Mensagem = SQLServerConnection.reader["descricao"].ToString();
+                Container.ver_mais.Add(a);
             }
             SQLServerConnection.closeConnection();
+            Post_Template.ItemsSource = Container.ver_mais;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -81,10 +69,9 @@ namespace Pets_At_First_Sight
         {
             Button starbutton = (Button)sender;
             PackIcon icon = (PackIcon)starbutton.Content;
-            Grid gr = (Grid)starbutton.Parent;
-            Label id = (Label)gr.Children[3];
-
+            int id = Container.animal_selecionado;
             SQLServerConnection.openConnection();
+            SQLServerConnection.command.Parameters.Clear();
             SQLServerConnection.sql = "projeto.AdotarAnimal";
             SQLServerConnection.command.Parameters.AddWithValue("@id", id);
             SQLServerConnection.command.Parameters.AddWithValue("@adotante_username", Container.current_user);
@@ -94,7 +81,7 @@ namespace Pets_At_First_Sight
             SQLServerConnection.closeConnection();
             SQLServerConnection.command.Parameters.Clear();
             icon.Kind = PackIconKind.Star;
-
+            new Adocoes();
         }
     }
 }

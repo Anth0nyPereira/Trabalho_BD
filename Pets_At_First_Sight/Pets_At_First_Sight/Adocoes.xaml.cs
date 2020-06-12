@@ -122,14 +122,5 @@ namespace Pets_At_First_Sight
             My_Adocoes.ItemsSource = Container.animais_adotados;
 
         }
-
-        private void ViewPost(object sender, MouseButtonEventArgs e)
-        {
-            Grid grd = (Grid)sender;
-            Label id = (Label)grd.Children[5];
-            Container.animal_selecionado = Int32.Parse(id.Content.ToString());
-            ViewPost_Adocoes post_MaisInfo = new ViewPost_Adocoes();
-            NavigationService.Navigate(post_MaisInfo);
-        }
     }
 }

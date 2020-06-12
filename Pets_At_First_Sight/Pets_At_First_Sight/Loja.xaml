@@ -18,25 +18,25 @@
             <Grid  Width="375">
                 <ItemsControl Name="My_Loja">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate> 
-                <materialDesign:Card Background="#b2bfdb" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" UniformCornerRadius="6" Padding="8" Margin="10,0,20,10">
+                        <DataTemplate>
+                            <materialDesign:Card Height="200" Background="#b2bfdb" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" UniformCornerRadius="6" Padding="8" Margin="10,0,20,10">
                                 <Grid>
-                        <Image Grid.Row="0" Source="{Binding uImage}" Margin="10,22.8,185.6,10" />
-                        <Label x:Name="NomeProduto" Content="{Binding NomeProduto}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="167.4,62.8,0,0" VerticalAlignment="Top" Width="82.2" FontFamily="Arial" Foreground="#FFF1E0E0"/>
-                        <Label x:Name="TipoProduto" Content="{Binding TipoServico}"  FontSize="18" HorizontalAlignment="Left" Height="30" Margin="167.4,100.8,0,0" VerticalAlignment="Top" Width="157.2"/>
-                        <Label x:Name="Empresa" Content="{Binding Empresa}" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="167,123,0,0" VerticalAlignment="Top" Width="161"/>
-                        <Label x:Name="Preco" Content="{Binding Preco}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
-                        <Label x:Name="Id" Content="{Binding ID}" Visibility="Collapsed" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
-                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="60" Margin="265,125,0,0" Width="80" RenderTransformOrigin="0.289,0.546">
-                            <Button Background="Transparent" BorderThickness="0" Click="Buy" Height="60" Margin="0,0,10,0" materialDesign:RippleAssist.IsDisabled="True">
-                                <materialDesign:PackIcon Kind="Cart" x:Name="shop" HorizontalAlignment="Left" Width="40" Height="40" />
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </materialDesign:Card>
-               
-                </DataTemplate>
-                </ItemsControl.ItemTemplate>
+                                    <Image Grid.Row="0" Source="{Binding uImage}" Margin="10,22.8,185.6,10" />
+                                    <Label x:Name="NomeProduto" Content="{Binding NomeProduto}" FontSize="20" HorizontalAlignment="Left" Height="28" Margin="126,32,0,0" VerticalAlignment="Top" Width="136" FontFamily="Arial" Foreground="#FFF1E0E0"/>
+                                    <Label x:Name="TipoProduto" Content="{Binding TipoServico}"  FontSize="18" HorizontalAlignment="Left" Height="30" Margin="132,74,0,0" VerticalAlignment="Top" Width="158"/>
+                                    <Label x:Name="Empresa" Content="{Binding Empresa}" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="131,115,0,0" VerticalAlignment="Top" Width="161"/>
+                                    <Label x:Name="Preco" Content="{Binding Preco}" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="130,152,0,0" VerticalAlignment="Top" Width="163"/>
+                                    <Label x:Name="Id" Content="{Binding ID}" Visibility="Collapsed" FontSize="18" HorizontalAlignment="Left" Height="28" Margin="167.4,150.8,0,0" VerticalAlignment="Top" Width="162.2"/>
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="60" Margin="249,0,0,124" Width="80" RenderTransformOrigin="0.289,0.546">
+                                        <Button Background="Transparent" BorderThickness="0" Click="Buy" Height="60" Margin="0,0,10,0" materialDesign:RippleAssist.IsDisabled="True">
+                                            <materialDesign:PackIcon Kind="Cart" x:Name="shop" HorizontalAlignment="Left" Width="40" Height="40" />
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </materialDesign:Card>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Grid>
         </ScrollViewer>

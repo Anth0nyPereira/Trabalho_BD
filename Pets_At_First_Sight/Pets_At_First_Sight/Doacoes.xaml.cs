@@ -75,6 +75,8 @@ namespace Pets_At_First_Sight
                     don.QuantidadeAlimento = SQLServerConnection.reader["QUANTIDADE"].ToString();
                 }
 
+                don.Abrigo = SQLServerConnection.reader["abrigo_username"].ToString();
+
                 my.Add(don);
             }
             SQLServerConnection.command.Parameters.Clear();
@@ -84,8 +86,27 @@ namespace Pets_At_First_Sight
 
         private void Add_doacao(object sender, RoutedEventArgs e)
         {
-            NewDonativo donation = new NewDonativo();
-            this.NavigationService.Navigate(donation);
+            MessageBoxResult add = MessageBox.Show("Pretende realizar um donativo monetário (SIM) ou alimentar (NÃO)?", "Adicionar Donativo", MessageBoxButton.YesNoCancel);
+            switch (add)
+            {
+                case MessageBoxResult.Yes:
+                    NewDonativo p = new NewDonativo();
+                    this.NavigationService.Navigate(p);
+                    break;
+                case MessageBoxResult.No:
+                    NewAlimentar na = new NewAlimentar();
+                    this.NavigationService.Navigate(na);
+                    break;
+            }
+        }
+
+        private void HideVis(object sender, EventArgs e)
+        {
+            Label target = (Label)sender;
+            if(target.Content.ToString() == "0")
+            {
+                target.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

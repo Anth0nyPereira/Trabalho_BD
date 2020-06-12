@@ -11,7 +11,7 @@
       Title="CompraProduto">
 
     <Grid>
-        <Label x:Name="Titulo_Loja" Content="Comprar Produto" Margin="78,40,77,583" FontFamily="Arial" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" Height="44"/>
+        <Label x:Name="Titulo_Loja" Content="Comprar Produto" Margin="78,40,77,583" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" Height="44"/>
         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Back">
             <materialDesign:PackIcon
                     Kind="ArrowBack"
@@ -19,7 +19,7 @@
                     Width="24" />
         </Button>
         <StackPanel Margin="42,164,45,383">
-            <Label FontWeight="Bold" FontFamily="Arial" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="44" Width="288">Método de Pagamento:</Label>
+            <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="44" Width="288">Método de Pagamento:</Label>
             <StackPanel Orientation="Vertical">
                 <RadioButton x:Name="CM" IsChecked="True">Cartão Multibanco</RadioButton>
                 <RadioButton x:Name="TB">Transferência Bancária</RadioButton>
@@ -46,7 +46,7 @@
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
-        <Label FontWeight="Bold" FontFamily="Arial" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,360,192,267" Content="Quantidade:"/>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,360,192,267" Content="Quantidade:"/>
         <Button
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             Height="50"
