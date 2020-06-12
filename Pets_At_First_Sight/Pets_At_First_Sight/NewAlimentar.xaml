@@ -12,7 +12,7 @@
       WindowWidth="375"
       Background="#DCE3E7">
 
-    <Grid>
+    <Grid Height="667">
         <Label x:Name="Titulo_Dons" Height="36" Content="Adicionar Donativo Alimentar" Margin="75,24,35,607" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" Click="Back_Click" HorizontalAlignment="Left" VerticalAlignment="Top">
             <materialDesign:PackIcon
@@ -20,5 +20,31 @@
                 Height="24"
                 Width="24" />
         </Button>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="36,412,216,215" Content="Quantidade:"/>
+        <Button
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Height="50"
+            materialDesign:ButtonAssist.CornerRadius="25"
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Margin="103,560,105,57" Click="addMon">
+            <TextBlock
+                Text="Registar" />
+        </Button>
+        <ComboBox
+            x:Name="abrigo"
+            MinWidth="72" Margin="209,174,0,465" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
+            <ComboBoxItem Content="acme"/>
+            <ComboBoxItem Content="agape"/>
+            <ComboBoxItem Content="caocomcoracao"/>
+            <ComboBoxItem Content="doadores.b"/>
+            <ComboBoxItem Content="happy.paw"/>
+            <ComboBoxItem Content="hooli"/>
+            <ComboBoxItem Content="patas.focinhos"/>
+            <ComboBoxItem Content="pet.pet"/>
+            <ComboBoxItem Content="ruff.official.us"/>
+        </ComboBox>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,174,192,453" Content="Abrigo:"/>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Width="190"  HorizontalContentAlignment="Center" Height="40" Margin="2,284,186,343" Content="Tipo de Alimento:"/>
+        <TextBox Height="40" x:Name="TipoComida" Margin="209,276,10,351"/>
+        <TextBox Height="40" x:Name="quantidade_" Margin="189,402,10,225"/>
     </Grid>
 </Page>

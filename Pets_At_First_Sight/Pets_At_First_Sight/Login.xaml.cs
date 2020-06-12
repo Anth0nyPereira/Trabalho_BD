@@ -74,8 +74,7 @@ namespace Pets_At_First_Sight
 
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+            private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Ainda não é possível recuperar a sua password. \nPedimos desculpa.", "Oops!", MessageBoxButton.OK);
         }

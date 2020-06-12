@@ -12,7 +12,7 @@
       WindowWidth="375"
       Background="#DCE3E7">
 
-    <Grid>
+    <Grid Height="667">
         <Label x:Name="Titulo_Dons" Height="36" Content="Adicionar Donativo Monetário" Margin="75,24,35,607" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="Back" Margin="16,20,0,0" Click="Back_Click" HorizontalAlignment="Left" VerticalAlignment="Top">
             <materialDesign:PackIcon
@@ -35,7 +35,7 @@
                   x:Name="quantidade_"
                   MinWidth="72"
                   IsEditable="True"
-                  ItemsSource="{Binding LongListToTestComboVirtualization}" Margin="209,360,0,279" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
+                  ItemsSource="{Binding LongListToTestComboVirtualization}" Margin="209,398,0,241" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
             <ComboBox.Text>
                 <Binding    
                       Path="SelectedTextTwo"
@@ -49,7 +49,7 @@
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
-        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,360,192,267" Content="Quantidade:"/>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,398,192,229" Content="Quantia:"/>
         <Button
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             Height="50"
@@ -58,6 +58,20 @@
             <TextBlock
                 Text="Registar" />
         </Button>
+        <ComboBox
+            x:Name="abrigo"
+            MinWidth="72" Margin="209,324,0,315" RenderTransformOrigin="1.294,0.714" HorizontalAlignment="Left" Width="102">
+            <ComboBoxItem Content="acme"/>
+            <ComboBoxItem Content="agape"/>
+            <ComboBoxItem Content="caocomcoracao"/>
+            <ComboBoxItem Content="doadores.b"/>
+            <ComboBoxItem Content="happy.paw"/>
+            <ComboBoxItem Content="hooli"/>
+            <ComboBoxItem Content="patas.focinhos"/>
+            <ComboBoxItem Content="pet.pet"/>
+            <ComboBoxItem Content="ruff.official.us"/>
+        </ComboBox>
+        <Label FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="40" Margin="60,324,192,303" Content="Abrigo:"/>
 
     </Grid>
 </Page>
