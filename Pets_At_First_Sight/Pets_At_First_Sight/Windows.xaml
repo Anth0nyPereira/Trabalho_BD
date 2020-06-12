@@ -4,42 +4,52 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Pets_At_First_Sight"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="667" d:DesignWidth="375"
       Title="Windows" Height="667" Width="375">
 
     <Grid>
         <Grid>
-            <TabControl x:Name="tabCo"   TabStripPlacement="Bottom">
-                <TabItem x:Name="Inicio" Height="40" Width="100" MaxWidth="92.4" >
+            <TabControl x:Name="tabCo"  HorizontalAlignment="Center" TabStripPlacement="Bottom">
+                <TabItem x:Name="Inicio" Height="40" Width="74.50" MaxWidth="74.50" Background="#00675b">
                     <TabItem.Header>
-                        <Image Source="Icons/home_tab.png" Height="35" Width="48"></Image>
+                        <materialDesign:PackIcon Kind="House" Foreground="White"  Width="35" Height="35" Background="Transparent"></materialDesign:PackIcon>
                     </TabItem.Header>
                     <TabItem.Content>
                         <Frame x:Name="Inicio1" Source="Inicio.xaml"></Frame>
                     </TabItem.Content>
                  </TabItem>
-                
-                <TabItem Height="40" Width="100" MaxWidth="92.4">
+
+                <TabItem Height="40" Width="74.50" MaxWidth="74.50" Background="#00675b">
                     <TabItem.Header>
-                        <Image Source="Icons/adocoes_tab.png" Height="35" Width="54"></Image>
+                        <materialDesign:PackIcon Kind="Star" Width="35" Foreground="White" Background="Transparent" Height="35"/>
                     </TabItem.Header>
                     <TabItem.Content>
                         <Frame Source="Adocoes.xaml"></Frame>
                     </TabItem.Content>
                 </TabItem>
-                <TabItem Height="40" Width="100" MaxWidth="92.4">
+                
+                <TabItem Height="40" Width="74.50" MaxWidth="74.50" Background="#00675b">
                     <TabItem.Header>
-                        <Image Source="Icons/loja_tab.png" Height="35.41" Width="55.5"></Image>
+                        <materialDesign:PackIcon Kind="CashPlus" Width="35" Foreground="White" Background="Transparent" Height="35"/>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <Frame Source="Doacoes.xaml"></Frame>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Height="40" Width="74.50" MaxWidth="74.50" Background="#00675b">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="Star" Width="35" Foreground="White" Background="Transparent" Height="35"/>
                     </TabItem.Header>
                     <TabItem.Content>
                         <Frame Source="Loja.xaml"></Frame>
                     </TabItem.Content>
                 </TabItem>
 
-                <TabItem Height="40" Width="100" MaxWidth="92.4">
+                <TabItem Height="40" Width="74.50" MaxWidth="74.50" Background="#00675b">
                     <TabItem.Header>
-                        <Image Source="Icons/perfil_tab.png" Height="35" Width="61"></Image>
+                        <materialDesign:PackIcon Kind="Person" Width="35" Foreground="White" Background="Transparent" Height="35"/>
                     </TabItem.Header>
                     <TabItem.Content>
                         <Frame Source="Perfil.xaml"></Frame>

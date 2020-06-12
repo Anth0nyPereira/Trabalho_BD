@@ -49,21 +49,22 @@ namespace Pets_At_First_Sight
         private List<ANIMAL> MeusPosts() {
             List<ANIMAL> my = new List<ANIMAL>();
             SQLServerConnection.openConnection();
-            SQLServerConnection.sql = "SELECT id, projeto.ANIMAL.nome AS nome, especie, raca, genero, vacina, chip, idade, projeto.ANIMAL.fotografia AS fotografia, descricao," +
-                "dono_username, tipo FROM projeto.ANIMAL INNER JOIN projeto.CONTA ON projeto.ANIMAL.dono_username = projeto.CONTA.username WHERE dono_username=@username2";
+            SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ANIMAIS WHERE dono_username=@username2";
             SQLServerConnection.command.Parameters.AddWithValue("@username2", Container.current_user);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
             SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             while (SQLServerConnection.reader.Read())
             {
-                ANIMAL animal = new ANIMAL();
-                animal.Id = (int)SQLServerConnection.reader["id"];
-                animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                animal.Raca = SQLServerConnection.reader["raca"].ToString();
-                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
-                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
-                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+                ANIMAL animal = new ANIMAL
+                {
+                    Id = (int)SQLServerConnection.reader["id"],
+                    Nome = SQLServerConnection.reader["nome"].ToString(),
+                    Raca = SQLServerConnection.reader["raca"].ToString(),
+                    Url_Image = SQLServerConnection.reader["fotografia"].ToString(),
+                    Mensagem = SQLServerConnection.reader["descricao"].ToString(),
+                    User_Name = SQLServerConnection.reader["dono_username"].ToString()
+                };
 
                 if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
@@ -156,6 +157,22 @@ namespace Pets_At_First_Sight
             Container.current_user = null;
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
+        }
+
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            StackPanel Sp = (StackPanel)sender;
+            Grid gr = (Grid)Sp.Parent;
+            Label id_label = (Label)gr.Children[4];
+            int id = Int32.Parse(id_label.Content.ToString());
+            SQLServerConnection.openConnection();
+            SQLServerConnection.sql = "DELETE FROM projeto.ANIMAL WHERE id = @id";
+            SQLServerConnection.command.Parameters.AddWithValue("@id", id);
+            SQLServerConnection.command.CommandType = CommandType.Text;
+            SQLServerConnection.command.CommandText = SQLServerConnection.sql;
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
+            SQLServerConnection.command.Parameters.Clear();
+            SQLServerConnection.closeConnection();
         }
     }
 }

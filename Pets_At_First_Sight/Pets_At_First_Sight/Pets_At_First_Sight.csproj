@@ -75,6 +75,13 @@
     <Compile Include="CriarConta.xaml.cs">
       <DependentUpon>CriarConta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Doacoes.xaml.cs">
+      <DependentUpon>Doacoes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DONATIVO.cs" />
+    <Compile Include="NewDonativo.xaml.cs">
+      <DependentUpon>NewDonativo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Teste.xaml.cs">
       <DependentUpon>Teste.xaml</DependentUpon>
     </Compile>
@@ -96,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CriarConta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Doacoes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +161,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewDonativo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

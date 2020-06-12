@@ -45,15 +45,17 @@ namespace Pets_At_First_Sight
            
             while (SQLServerConnection.reader.Read())
             {
-                ANIMAL animal = new ANIMAL();
-                animal.Id = (int)SQLServerConnection.reader["id"];
-                animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                animal.Raca = SQLServerConnection.reader["raca"].ToString();
-                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
-                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
-                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
-               
-                if(SQLServerConnection.reader["tipo"].ToString() == "Particular")
+                ANIMAL animal = new ANIMAL
+                {
+                    Id = (int)SQLServerConnection.reader["id"],
+                    Nome = SQLServerConnection.reader["nome"].ToString(),
+                    Raca = SQLServerConnection.reader["raca"].ToString(),
+                    Url_Image = SQLServerConnection.reader["fotografia"].ToString(),
+                    Mensagem = SQLServerConnection.reader["descricao"].ToString(),
+                    User_Name = SQLServerConnection.reader["dono_username"].ToString()
+                };
+
+                if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
                     animal.Tipo_Doador = "particular";
                 }
@@ -150,13 +152,15 @@ namespace Pets_At_First_Sight
 
                 while (SQLServerConnection.reader.Read())
                 {
-                    ANIMAL animal = new ANIMAL();
-                    animal.Id = (int)SQLServerConnection.reader["id"];
-                    animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                    animal.Especie = SQLServerConnection.reader["especie"].ToString();
-                    animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
-                    animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
-                    animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+                    ANIMAL animal = new ANIMAL
+                    {
+                        Id = (int)SQLServerConnection.reader["id"],
+                        Nome = SQLServerConnection.reader["nome"].ToString(),
+                        Especie = SQLServerConnection.reader["especie"].ToString(),
+                        Url_Image = SQLServerConnection.reader["fotografia"].ToString(),
+                        Mensagem = SQLServerConnection.reader["descricao"].ToString(),
+                        User_Name = SQLServerConnection.reader["dono_username"].ToString()
+                    };
 
                     if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                     {

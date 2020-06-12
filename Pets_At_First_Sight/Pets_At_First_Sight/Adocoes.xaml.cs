@@ -29,28 +29,30 @@ namespace Pets_At_First_Sight
 
         public void GetAnimals()
         {
-            Container.animais_adotados.Clear();
-            SQLServerConnection.reader.Dispose();
+            Container.animais.Clear();
+
             SQLServerConnection.openConnection();
 
             SQLServerConnection.sql = "SELECT * FROM projeto.LISTAR_ADOTADOS(@username);";
             SQLServerConnection.command.Parameters.AddWithValue("@username", Container.current_user);
             SQLServerConnection.command.CommandType = CommandType.Text;
             SQLServerConnection.command.CommandText = SQLServerConnection.sql;
-            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader(); 
+            SQLServerConnection.reader = SQLServerConnection.command.ExecuteReader();
             SQLServerConnection.command.Parameters.Clear();
 
             while (SQLServerConnection.reader.Read())
             {
-                ANIMAL animal = new ANIMAL();
-                animal.Id = (int)SQLServerConnection.reader["id"];
-                animal.Nome = SQLServerConnection.reader["nome"].ToString();
-                animal.Raca = SQLServerConnection.reader["raca"].ToString();
-                animal.Url_Image = SQLServerConnection.reader["fotografia"].ToString();
-                animal.Mensagem = SQLServerConnection.reader["descricao"].ToString();
-                animal.User_Name = SQLServerConnection.reader["dono_username"].ToString();
+                ANIMAL animal = new ANIMAL
+                {
+                    Id = (int)SQLServerConnection.reader["id"],
+                    Nome = SQLServerConnection.reader["nome"].ToString(),
+                    Raca = SQLServerConnection.reader["raca"].ToString(),
+                    Url_Image = SQLServerConnection.reader["fotografia"].ToString(),
+                    Mensagem = SQLServerConnection.reader["descricao"].ToString(),
+                    User_Name = SQLServerConnection.reader["dono_username"].ToString()
+                };
 
-                
+
                 if (SQLServerConnection.reader["tipo"].ToString() == "Particular")
                 {
                     animal.Tipo_Doador = "particular";
@@ -115,11 +117,10 @@ namespace Pets_At_First_Sight
                 {
                     animal.Idade = (int)SQLServerConnection.reader["idade"] / 12 + " anos";
                 }
-                Container.animais_adotados.Add(animal);
+                Container.animais.Add(animal);
             }
-            SQLServerConnection.reader.Dispose();
             SQLServerConnection.closeConnection();
-            My_Adocoes.ItemsSource = Container.animais_adotados;
+            My_Adocoes.ItemsSource = Container.animais;
 
         }
 
